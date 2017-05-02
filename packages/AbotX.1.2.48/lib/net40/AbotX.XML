@@ -1,0 +1,539 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AbotX</name>
+    </assembly>
+    <members>
+        <member name="T:AbotX.Core.IPauseResumeCrawlContextAdapter">
+            <summary>
+            Responsible for keeping the crawl context valid during a pause/resume.
+            </summary>
+        </member>
+        <member name="T:AbotX.Core.IJsRenderer">
+            <summary>
+            Renders javascript in the pageContent param and returns the modified PageContent object
+            </summary>
+        </member>
+        <member name="M:AbotX.Core.IJsRenderer.Render(System.Uri,Abot.Poco.PageContent)">
+            <summary>
+            Renders any javascript in the pageContent param and updates its properties that are affected (Text, Bytes, etc..)
+            </summary>
+        </member>
+        <member name="T:AbotX.Core.PhantomJsRenderer">
+            <summary>
+            Renders javascript in the pageContent param and returns the modified PageContent object using PhantomJS
+            </summary>
+        </member>
+        <member name="M:AbotX.Core.PhantomJsRenderer.Render(System.Uri,Abot.Poco.PageContent)">
+            <inheritdoc/>
+        </member>
+        <member name="T:AbotX.Core.ImplementationOverride">
+            <summary>
+            Creates the default implementations of core interfaces that Abot needs to function
+            </summary>
+        </member>
+        <member name="T:AbotX.Poco.ImplementationContainer">
+            <summary>
+            Holds all implementations of core interfaces that Abot needs to function. 
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.ImplementationContainer.SiteSiteStressAnalyzer">
+            <summary>
+            Analyzes stress of a site the host machine
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.ImplementationContainer.HostStressAnalyzer">
+            <summary>
+            Analyzes stress of the host machine
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.ImplementationContainer.CpuSampler">
+            <summary>
+            Gets cpu usage information
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.ImplementationContainer.ShouldCrawlPage">
+            <summary>
+            Determines whether a page should be crawled or not
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.ImplementationContainer.ShouldDownloadPageContent">
+            <summary>
+            Determine whether the page's raw content should be dowloaded
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.ImplementationContainer.ShouldCrawlPageLinks">
+            <summary>
+            Determine whether a page's links should be crawled or not
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.ImplementationContainer.ShouldScheduleLink">
+            <summary>
+            Determine whether a cerain link on a page should be scheduled to be crawled
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.ImplementationContainer.IsInternalUri">
+            <summary>
+            Determines whether the 1st uri param is considered an internal uri to the second uri param.
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.ImplementationContainer.ShouldRenderJavascript">
+            <summary>
+            Determine whether the javascript should be rendered
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.ImplementationContainer.ShouldRecrawlPage">
+            <summary>
+            Determines whether the page should be recrawled.
+            </summary>
+        </member>
+        <member name="T:AbotX.Parallel.ParallelImplementationOverride">
+            <summary>
+            Creates the default implementations of core interfaces that Abot needs to function
+            </summary>
+        </member>
+        <member name="T:AbotX.Parallel.ParallelImplementationContainer">
+            <summary>
+            Holds all implementations of core interfaces that AbotX ParallelCrawlerEngine needs to function. 
+            </summary>
+        </member>
+        <member name="P:AbotX.Parallel.ParallelImplementationContainer.HostStressAnalyzer">
+            <summary>
+            Analyzes stress of the host machine
+            </summary>
+        </member>
+        <member name="P:AbotX.Parallel.ParallelImplementationContainer.CpuSampler">
+            <summary>
+            Gets cpu usage information
+            </summary>
+        </member>
+        <member name="T:AbotX.Parallel.IParallelCrawlerEngine">
+            <summary>
+            Responsible for crawling multiple sites concurrently
+            </summary>
+        </member>
+        <member name="M:AbotX.Parallel.IParallelCrawlerEngine.Start">
+            <summary>
+            Start crawling sites.
+            </summary>
+        </member>
+        <member name="M:AbotX.Parallel.IParallelCrawlerEngine.StartAsync">
+            <summary>
+            Start crawling sites.
+            </summary>
+        </member>
+        <member name="M:AbotX.Parallel.IParallelCrawlerEngine.Stop(System.Boolean)">
+            <summary>
+            Stops crawling sites. Any in process requests/responses will be aborted if isHardStop is set to true.
+            </summary>
+        </member>
+        <member name="M:AbotX.Parallel.IParallelCrawlerEngine.Pause">
+            <summary>
+            Pauses all crawls. Any in process requests/responses WILL continue until they are complete.
+            </summary>
+        </member>
+        <member name="M:AbotX.Parallel.IParallelCrawlerEngine.Resume">
+            <summary>
+            Resumes all crawls from where they were paused.
+            </summary>
+        </member>
+        <member name="M:AbotX.Parallel.IParallelCrawlerEngine.SpeedUp">
+            <summary>
+            Speed up the crawl by increasing concurrency
+            </summary>
+        </member>
+        <member name="M:AbotX.Parallel.IParallelCrawlerEngine.SlowDown">
+            <summary>
+            Speed up the crawl by increasing concurrency
+            </summary>
+        </member>
+        <member name="E:AbotX.Parallel.IParallelCrawlerEngine.CrawlerInstanceCreated">
+            <summary>
+            Synchronous event that is fired when a new instance of crawler has been created.
+            </summary>
+        </member>
+        <member name="E:AbotX.Parallel.IParallelCrawlerEngine.SiteCrawlStarting">
+            <summary>
+            Synchronous event that is fired before a site is crawled.
+            </summary>
+        </member>
+        <member name="E:AbotX.Parallel.IParallelCrawlerEngine.SiteCrawlCompleted">
+            <summary>
+            Synchronous event that is fired when a site has been crawled.
+            </summary>
+        </member>
+        <member name="E:AbotX.Parallel.IParallelCrawlerEngine.AllCrawlsCompleted">
+            <summary>
+            Event that is fired when the engine is complete doing all work.
+            </summary>
+        </member>
+        <member name="E:AbotX.Parallel.IParallelCrawlerEngine.CrawlerInstanceCreatedAsync">
+            <summary>
+            Asynchronous event that is fired when a new instance of crawler has been created.
+            </summary>
+        </member>
+        <member name="E:AbotX.Parallel.IParallelCrawlerEngine.SiteCrawlStartingAsync">
+            <summary>
+            Asynchronous event that is fired before a page is crawled.
+            </summary>
+        </member>
+        <member name="E:AbotX.Parallel.IParallelCrawlerEngine.SiteCrawlCompletedAsync">
+            <summary>
+            Asynchronous event that is fired when an individual page has been crawled.
+            </summary>
+        </member>
+        <member name="T:AbotX.Parallel.ParallelCrawlerEngine">
+            <summary>
+            Responsible for crawling multiple sites concurrently
+            </summary>
+        </member>
+        <member name="M:AbotX.Parallel.ParallelCrawlerEngine.Start">
+            <summary>
+            Start crawling sites.
+            </summary>
+        </member>
+        <member name="M:AbotX.Parallel.ParallelCrawlerEngine.StartAsync">
+            <summary>
+            Start crawling sites.
+            </summary>
+        </member>
+        <member name="M:AbotX.Parallel.ParallelCrawlerEngine.Stop(System.Boolean)">
+            <summary>
+            Stops crawling sites. Any in process requests/responses will be aborted if isHardStop is set to true.
+            </summary>
+        </member>
+        <member name="M:AbotX.Parallel.ParallelCrawlerEngine.Pause">
+            <summary>
+            Pauses all crawls. Any in process requests/responses WILL continue until they are complete.
+            </summary>
+        </member>
+        <member name="M:AbotX.Parallel.ParallelCrawlerEngine.Resume">
+            <summary>
+            Resumes all crawls from where they were paused.
+            </summary>
+        </member>
+        <member name="E:AbotX.Parallel.ParallelCrawlerEngine.CrawlerInstanceCreated">
+            <summary>
+            Synchronous event that is fired when a new instance of crawler has been created.
+            </summary>
+        </member>
+        <member name="E:AbotX.Parallel.ParallelCrawlerEngine.SiteCrawlStarting">
+            <summary>
+            Synchronous event that is fired before a site is crawled.
+            </summary>
+        </member>
+        <member name="E:AbotX.Parallel.ParallelCrawlerEngine.SiteCrawlCompleted">
+            <summary>
+            Synchronous event that is fired when a site has been crawled.
+            </summary>
+        </member>
+        <member name="E:AbotX.Parallel.ParallelCrawlerEngine.AllCrawlsCompleted">
+            <summary>
+            Event that is fired when the engine is complete doing all work.
+            </summary>
+        </member>
+        <member name="E:AbotX.Parallel.ParallelCrawlerEngine.CrawlerInstanceCreatedAsync">
+            <summary>
+            Asynchronous event that is fired when a new instance of crawler has been created.
+            </summary>
+        </member>
+        <member name="E:AbotX.Parallel.ParallelCrawlerEngine.SiteCrawlStartingAsync">
+            <summary>
+            Asynchronous event that is fired before a page is crawled.
+            </summary>
+        </member>
+        <member name="E:AbotX.Parallel.ParallelCrawlerEngine.SiteCrawlCompletedAsync">
+            <summary>
+            Asynchronous event that is fired when an individual page has been crawled.
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.SiteToCrawl.SiteBag">
+            <summary>
+            Can store values of any type. Useful for adding custom values dynamically
+            </summary>
+        </member>
+        <member name="T:AbotX.Parallel.ISiteToCrawlConsumer">
+            <summary>
+            Responsible for crawling the sites
+            </summary>
+        </member>
+        <member name="M:AbotX.Parallel.ISiteToCrawlConsumer.Consume(AbotX.Poco.SiteToCrawl,System.Threading.CancellationTokenSource)">
+            <summary>
+            Turns a SiteToCrawl into a CrawledSite by triggering crawling
+            </summary>
+        </member>
+        <member name="E:AbotX.Parallel.ISiteToCrawlConsumer.CrawlerInstanceCreated">
+            <summary>
+            Synchronous event that is fired before a page is crawled.
+            </summary>
+        </member>
+        <member name="T:AbotX.Parallel.SiteToCrawlConsumer">
+            <summary>
+            Responsible for crawling the sites
+            </summary>
+        </member>
+        <member name="M:AbotX.Parallel.SiteToCrawlConsumer.Consume(AbotX.Poco.SiteToCrawl,System.Threading.CancellationTokenSource)">
+            <summary>
+            Turns a SiteToCrawl into a CrawledSite by triggering crawling
+            </summary>
+        </member>
+        <member name="T:AbotX.Parallel.ISiteToCrawlProducer">
+            <summary>
+            Responsible for retrieving the sites to crawl
+            </summary>
+        </member>
+        <member name="T:AbotX.Parallel.SiteToCrawlProducer">
+            <summary>
+            Responsible for retrieving the sites to crawl
+            </summary>
+        </member>
+        <member name="T:AbotX.Crawler.ICrawlerX">
+            <summary>
+            Web crawler which extends Abot's IWebCrawler interface with advanced features
+            </summary>
+        </member>
+        <member name="M:AbotX.Crawler.ICrawlerX.CrawlAsync(System.Uri)">
+            <summary>
+            Start a crawl asynchronously
+            </summary>
+        </member>
+        <member name="M:AbotX.Crawler.ICrawlerX.Pause">
+            <summary>
+            Pauses the crawl. Any in process requests/responses WILL continue until they are complete.
+            </summary>
+        </member>
+        <member name="M:AbotX.Crawler.ICrawlerX.Resume">
+            <summary>
+            Resumes the crawl from where it was paused.
+            </summary>
+        </member>
+        <member name="M:AbotX.Crawler.ICrawlerX.Stop(System.Boolean)">
+            <summary>
+            Stops the crawl. Any in process requests/responses will be aborted if isHardStop is set to true.
+            </summary>
+        </member>
+        <member name="M:AbotX.Crawler.ICrawlerX.SlowDown">
+            <summary>
+            Slow down the crawl
+            </summary>
+        </member>
+        <member name="M:AbotX.Crawler.ICrawlerX.SpeedUp">
+            <summary>
+            Speed up the crawl
+            </summary>
+        </member>
+        <member name="M:AbotX.Crawler.ICrawlerX.ShouldRenderPageJavascript(System.Func{Abot.Poco.CrawledPage,Abot.Poco.CrawlContext,Abot.Poco.CrawlDecision})">
+            <summary>
+            Synchronous method that registers a delegate to be called to determine whether a page should have its javascript rendered or not
+            </summary>
+        </member>
+        <member name="P:AbotX.Crawler.ICrawlerX.CrawlContext">
+            <summary>
+            The current context of the crawl
+            </summary>
+        </member>
+        <member name="P:AbotX.Crawler.ICrawlerX.Impls">
+            <summary>
+            All the implementation of key interfaces
+            </summary>
+        </member>
+        <member name="T:AbotX.Crawler.CrawlerX">
+            <summary>
+            Web crawler which extends Abot's PoliteWebCrawler implementation with advanced features
+            </summary>
+        </member>
+        <member name="M:AbotX.Crawler.CrawlerX.CrawlAsync(System.Uri)">
+            <summary>
+            Start a crawl asynchronously
+            </summary>
+        </member>
+        <member name="M:AbotX.Crawler.CrawlerX.Pause">
+            <summary>
+            Pauses the crawl. Any in process requests/responses WILL continue until they are complete.
+            </summary>
+        </member>
+        <member name="M:AbotX.Crawler.CrawlerX.Resume">
+            <summary>
+            Resumes the crawl from where it was paused.
+            </summary>
+        </member>
+        <member name="M:AbotX.Crawler.CrawlerX.Stop(System.Boolean)">
+            <summary>
+            Stops the crawl. Any in process requests/responses will be aborted if isHardStop is set to true.
+            </summary>
+        </member>
+        <member name="M:AbotX.Crawler.CrawlerX.SlowDown">
+            <summary>
+            Slow down the crawl
+            </summary>
+        </member>
+        <member name="M:AbotX.Crawler.CrawlerX.SpeedUp">
+            <summary>
+            Speed up the crawl
+            </summary>
+        </member>
+        <member name="M:AbotX.Crawler.CrawlerX.ShouldRenderPageJavascript(System.Func{Abot.Poco.CrawledPage,Abot.Poco.CrawlContext,Abot.Poco.CrawlDecision})">
+            <summary>
+            Synchronous method that registers a delegate to be called to determine whether a page should have its javascript rendered or not
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.CrawlConfigurationX.MaxConcurrentSiteCrawls">
+            <summary>
+            The max number of site crawls that can be happening concurrently
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.CrawlConfigurationX.SitesToCrawlBatchSizePerRequest">
+            <summary>
+            The number of sites to request from the SiteToCrawlProvider per call
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.CrawlConfigurationX.MinSiteToCrawlRequestDelayInSecs">
+            <summary>
+            The minimum time to wait in between calls to the SiteToCrawlProvider
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.CrawlConfigurationX.IsJavascriptRenderingEnabled">
+            <summary>
+            Whether page javascript should be rendered. WARNING: This uses more cpu/memory and significantly slows down the crawl.
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.CrawlConfigurationX.JavascriptRenderingWaitTimeInMilliseconds">
+            <summary>
+            The number of milliseconds to wait for rendering the page's javascript
+            </summary>
+        </member>
+        <member name="T:AbotX.Poco.AutoThrottlingConfig">
+            <summary>
+            Settings to control AutoThrottling behavior which is the ability for the crawler to automatically 
+            slow down if it detects that the site it is trying to crawl is unable to handle the load.
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.AutoThrottlingConfig.IsEnabled">
+            <summary>
+            Whether to enable the AutoThrottling feature
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.AutoThrottlingConfig.ThresholdMed">
+            <summary>
+            The number of "stressed" requests before considering a crawl as under medium stress
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.AutoThrottlingConfig.ThresholdHigh">
+            <summary>
+            The number of "stressed" requests before considering a crawl as under high stress
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.AutoThrottlingConfig.ThresholdTimeInMilliseconds">
+            <summary>
+            The number of elapsed milliseconds in response time that would consider the response "stressed"
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.AutoThrottlingConfig.MinAdjustmentWaitTimeInSecs">
+            <summary>
+            The minimum number of seconds since the last throttled request to wait before attempting to check/adjust 
+            throttling again. We want to give the last adjustment a chance to work before adjusting again. 
+            </summary>
+        </member>
+        <member name="T:AbotX.Poco.AutoTuningConfig">
+            <summary>
+            Settings to control AutoTuning behavior which is the ability for the crawler to automatically 
+            speed up and slow down if it detects that the host machine is running out of resources.
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.AutoTuningConfig.CpuThresholdMed">
+            <summary>
+            The avg cpu percentage before considering a host as under medium stress
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.AutoTuningConfig.CpuThresholdHigh">
+            <summary>
+            The avg cpu percentage before considering a host as under high stress
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.AutoTuningConfig.MinAdjustmentWaitTimeInSecs">
+            <summary>
+            The minimum number of seconds since the last tuned action to wait before attempting to check/adjust 
+            tuning again. We want to give the last adjustment a chance to work before adjusting again. 
+            </summary>
+        </member>
+        <member name="T:AbotX.Poco.AcceleratorConfig">
+            <summary>
+            Settings to control the Accelerator behavior which is the ability for the crawler to 
+            speed up.
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.AcceleratorConfig.ConcurrentSiteCrawlsIncrement">
+            <summary>
+            The number to increment the MaxConcurrentSiteCrawls for each call the the SpeedUp() method.
+            This deals with site crawl concurrency, NOT the number of concurrent http requests to a single site crawl.
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.AcceleratorConfig.ConcurrentRequestIncrement">
+            <summary>
+            The number to increment the MaxConcurrentThreads for each call the the SpeedUp() method.
+            This deals with the number of concurrent http requests for a single crawl.
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.AcceleratorConfig.DelayDecrementInMilliseconds">
+            <summary>
+            If there is a configured (manual or programatically determined) delay in between requests to a site, 
+            this is the amount of milliseconds to remove from that configured value on every call to the SpeedUp() method.
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.AcceleratorConfig.MinDelayInMilliseconds">
+            <summary>
+            If there is a configured (manual or programatically determined) delay in between requests to a site, 
+            this is the minimum amount of milliseconds to delay no matter how many calls to the SpeedUp() method.
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.AcceleratorConfig.ConcurrentSiteCrawlsMax">
+            <summary>
+            The maximum amount of concurrent site crawls to allow no matter how many calls to the SpeedUp() method.
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.AcceleratorConfig.ConcurrentRequestMax">
+            <summary>
+            The maximum amount of concurrent http requests to a single site no matter how many calls to the SpeedUp() method.
+            </summary>
+        </member>
+        <member name="T:AbotX.Poco.DeceleratorConfig">
+            <summary>
+            Settings to control the Decelerator behavior which is the ability for the crawler to 
+            slow down. Used by both the Auto Tuning and Auto Throttling features.
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.DeceleratorConfig.ConcurrentSiteCrawlsDecrement">
+            <summary>
+            The number to decrement the MaxConcurrentSiteCrawls for each call the the SlowDown() method.
+            This deals with site crawl concurrency, NOT the number of concurrent http requests to a single site crawl.
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.DeceleratorConfig.ConcurrentRequestDecrement">
+            <summary>
+            The number to decrement the MaxConcurrentThreads for each call the the SlowDown() method.
+            This deals with the number of concurrent http requests for a single crawl.
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.DeceleratorConfig.DelayIncrementInMilliseconds">
+            <summary>
+            If there is a configured (manual or programatically determined) delay in between requests to a site, 
+            this is the amount of milliseconds to add to that configured value on every call to the SlowDown() method.
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.DeceleratorConfig.MaxDelayInMilliseconds">
+            <summary>
+            The maximum value the delay can be.
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.DeceleratorConfig.ConcurrentSiteCrawlsMin">
+            <summary>
+            The minimum amount of concurrent site crawls to allow no matter how many calls to the SlowDown() method.
+            </summary>
+        </member>
+        <member name="P:AbotX.Poco.DeceleratorConfig.ConcurrentRequestMin">
+            <summary>
+            The minimum amount of concurrent http requests to a single site no matter how many calls to the SlowDown() method.
+            </summary>
+        </member>
+    </members>
+</doc>
