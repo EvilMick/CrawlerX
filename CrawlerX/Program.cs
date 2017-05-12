@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 namespace CrawlerX
 {
@@ -13,7 +13,8 @@ namespace CrawlerX
             Extractor extractor = new Extractor();
             LectorRSS reader = new LectorRSS();
             DataExcell excell = new DataExcell();
-            //crawler.start_crawler();
+            PDFExtractor pdfextractor = new PDFExtractor();
+            crawler.start_crawler();
             do
             {
                 userInput = DisplayMenu();
@@ -25,8 +26,8 @@ namespace CrawlerX
                         Console.WriteLine("Operacion terminada");
                         break;
                     case 2:
-                        extractor.extraer_datos();
-                        
+                        //extractor.extraer_datos();
+                        extractor.lonja_albacete();
                         break;
                     case 3:
                         reader.RSS_XML();
@@ -34,6 +35,14 @@ namespace CrawlerX
                         break;
                     case 4:
                         excell.read_data();
+
+                        break;
+                    case 5:
+                        extractor.limpiar();
+
+                        break;
+                    case 6:
+                        pdfextractor.ReadPdfFile();
 
                         break;
                 }
@@ -48,6 +57,8 @@ namespace CrawlerX
             Console.WriteLine("2. Extraer Datos");
             Console.WriteLine("3. Noticias RSS");
             Console.WriteLine("4. Datos ficheros excell");
+            Console.WriteLine("5. Limpiar datos");
+            Console.WriteLine("6. Lector pdfs");
             Console.WriteLine("0. Salir");
             var result = Console.ReadLine();
             if (result == "" || result == " ")

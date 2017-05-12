@@ -21,8 +21,7 @@ namespace CrawlerX
             files = new List<FileItem>();
             siteToCrawlProvider.AddSitesToCrawl(new List<SiteToCrawl>
             {
-                new SiteToCrawl{ Uri = new Uri("http://www.mapama.gob.es/es/estadistica/temas/estadisticas-agrarias/economia/precios-medios-nacionales/pmn_tabla.asp#")}
-                
+                new SiteToCrawl{ Uri = new Uri("http://www.mapama.gob.es/es/estadistica/temas/estadisticas-agrarias/economia/precios-medios-nacionales/pmn_tabla.asp#")}                         
         });
 
             /*
@@ -55,13 +54,14 @@ namespace CrawlerX
                 Console.WriteLine("Completed crawling site {0}", eventArgs.CrawledSite.SiteToCrawl.Uri);
                                
             };
-
+            
             crawlEngine.CrawlerInstanceCreated += (sender, eventArgs) =>
             {
                 //Register for crawler level events. These are Abot's events!!!
                 eventArgs.Crawler.PageCrawlCompleted += (abotSender, abotEventArgs) =>
                 {
                     //Console.WriteLine("You have the crawled page here in abotEventArgs.CrawledPage...");
+                    
                     if (abotEventArgs.CrawledPage.Uri.ToString().Contains("pmn_historico"))
                     {
                         var name = abotEventArgs.CrawledPage.Uri.ToString().Substring(107, 9) + abotEventArgs.CrawledPage.Uri.ToString().Substring(128) + ".html";
@@ -69,15 +69,13 @@ namespace CrawlerX
                         files.Add(fi);
 
                     }
+                    
 
 
                 };
             };
             crawlEngine.StartAsync();
             
-            //Console.WriteLine("Press enter key to stop");
-            //Console.Read();
-
         }
 
         public List<FileItem> getfiles()

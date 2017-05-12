@@ -40,3 +40,47 @@ C:\Users\Miguel Angel\documents\visual studio 2015\Projects\CrawlerX\CrawlerX\bi
 C:\Users\Miguel Angel\Documents\Visual Studio 2015\Projects\CrawlerX\CrawlerX\bin\Debug\Excel.dll
 C:\Users\Miguel Angel\Documents\Visual Studio 2015\Projects\CrawlerX\CrawlerX\bin\Debug\ICSharpCode.SharpZipLib.dll
 C:\Users\Miguel Angel\Documents\Visual Studio 2015\Projects\CrawlerX\CrawlerX\bin\Debug\Excel.pdb
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\CrawlerX.exe.config
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\obj\Debug\CrawlerX.exe
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\obj\Debug\CrawlerX.pdb
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\phantomjs.exe
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\phantomjs-license.txt
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\AutoMapper.Net4.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\CrawlerX.exe
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\CrawlerX.pdb
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\Abot.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\AbotX.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\AngleSharp.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\AutoMapper.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\CsQuery.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\Elasticsearch.Net.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\Excel.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\log4net.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\MathNet.Numerics.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\Nest.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\NReco.PhantomJS.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\Portable.Licensing.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\Robots.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\Abot.xml
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\AbotX.xml
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\AngleSharp.xml
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\AutoMapper.pdb
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\AutoMapper.xml
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\AutoMapper.Net4.pdb
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\CsQuery.xml
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\Elasticsearch.Net.pdb
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\Elasticsearch.Net.xml
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\Excel.pdb
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\log4net.xml
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\MathNet.Numerics.xml
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\Nest.pdb
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\Nest.xml
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\NReco.PhantomJS.xml
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\Portable.Licensing.xml
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\obj\Debug\CrawlerX.csprojResolveAssemblyReference.cache
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\itextsharp.dll
+C:\Users\Miguel Angel\Documents\Repositorios\CrawlerX\CrawlerX\bin\Debug\itextsharp.xml
