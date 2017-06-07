@@ -1815,3 +1815,79 @@
 [2017-05-12 11:19:36,581] [15 ] [INFO ] - Crawl for domain [https://www.oviespana.com/informacion-de-ovino/servicio-diario-de-noticias] completed successfully in [57.8510595] seconds, crawled [100] pages
 [2017-05-12 11:19:36,593] [19 ] [INFO ] - All ISiteToCrawlConsumer threads have completed
 [2017-05-12 11:19:36,593] [19 ] [INFO ] - All crawls have completed
+[2017-05-15 17:49:51,321] [9  ] [INFO ] - Started [1] thread for monitoring
+[2017-05-15 17:49:51,355] [13 ] [INFO ] - Engine is still running...
+[2017-05-15 17:49:51,903] [9  ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-05-15 17:49:51,924] [14 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-05-15 17:49:51,960] [14 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-05-15 17:49:52,014] [14 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-05-15 17:49:52,854] [9  ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-05-15 17:49:53,564] [18 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-05-15 17:49:56,840] [13 ] [INFO ] - Engine is still running...
+[2017-05-15 17:50:01,909] [13 ] [INFO ] - Engine is still running...
+[2017-05-15 17:50:07,322] [13 ] [INFO ] - Engine is still running...
+[2017-05-15 17:50:09,465] [15 ] [INFO ] - Crawl for domain [http://www.efeagro.com/?cat=3&submit=Buscar&s=+] completed successfully in [14.4612314] seconds, crawled [38] pages
+[2017-05-15 17:50:09,501] [20 ] [INFO ] - All ISiteToCrawlConsumer threads have completed
+[2017-05-15 17:50:09,501] [20 ] [INFO ] - All crawls have completed
+[2017-05-22 11:51:37,728] [12 ] [INFO ] - Engine is still running...
+[2017-05-22 11:51:37,728] [9  ] [INFO ] - Started [1] thread for monitoring
+[2017-05-22 11:51:37,771] [9  ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-05-22 11:51:37,779] [13 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-05-22 11:51:37,790] [13 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-05-22 11:51:37,791] [13 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-05-22 11:51:37,808] [9  ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-05-22 11:51:38,800] [19 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-05-22 11:51:42,777] [12 ] [INFO ] - Engine is still running...
+[2017-05-22 11:51:47,790] [12 ] [INFO ] - Engine is still running...
+[2017-05-22 11:51:49,299] [14 ] [INFO ] - Crawl for domain [http://www.efeagro.com/?cat=3&submit=Buscar&s=+] completed successfully in [11.1733046] seconds, crawled [38] pages
+[2017-05-22 11:51:49,311] [18 ] [INFO ] - All ISiteToCrawlConsumer threads have completed
+[2017-05-22 11:51:49,311] [18 ] [INFO ] - All crawls have completed
+[2017-06-01 10:05:52,317] [9  ] [INFO ] - Started [1] thread for monitoring
+[2017-06-01 10:05:52,317] [12 ] [INFO ] - Engine is still running...
+[2017-06-01 10:05:52,342] [9  ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-06-01 10:05:52,358] [13 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-06-01 10:05:52,362] [13 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-06-01 10:05:52,378] [13 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-06-01 10:05:52,393] [9  ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-06-01 10:05:53,385] [19 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-06-01 10:05:57,562] [12 ] [INFO ] - Engine is still running...
+[2017-06-01 10:06:02,690] [12 ] [INFO ] - Engine is still running...
+[2017-06-01 10:06:03,138] [14 ] [INFO ] - Crawl for domain [http://www.mapama.gob.es/es/estadistica/temas/estadisticas-agrarias/economia/precios-medios-nacionales/pmn_tabla.asp#] completed successfully in [10.0652695] seconds, crawled [95] pages
+[2017-06-01 10:06:03,185] [18 ] [INFO ] - All ISiteToCrawlConsumer threads have completed
+[2017-06-01 10:06:03,190] [18 ] [INFO ] - All crawls have completed
+[2017-06-01 10:10:24,276] [9  ] [INFO ] - Started [1] thread for monitoring
+[2017-06-01 10:10:24,281] [12 ] [INFO ] - Engine is still running...
+[2017-06-01 10:10:24,444] [9  ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-06-01 10:10:24,482] [13 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-06-01 10:10:24,488] [13 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-06-01 10:10:24,499] [13 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-06-01 10:10:24,621] [9  ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-06-01 10:10:25,517] [17 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-06-01 10:10:29,372] [12 ] [INFO ] - Engine is still running...
+[2017-06-01 10:10:34,380] [12 ] [INFO ] - Engine is still running...
+[2017-06-01 10:10:39,380] [12 ] [INFO ] - Engine is still running...
+[2017-06-01 10:10:44,382] [12 ] [INFO ] - Engine is still running...
+[2017-06-01 10:10:47,541] [14 ] [INFO ] - Crawl for domain [http://www.mapama.gob.es/es/estadistica/temas/estadisticas-agrarias/economia/precios-medios-nacionales/pmn_tabla.asp#] completed successfully in [22.3000513] seconds, crawled [95] pages
+[2017-06-01 10:10:47,545] [17 ] [INFO ] - All ISiteToCrawlConsumer threads have completed
+[2017-06-01 10:10:47,545] [17 ] [INFO ] - All crawls have completed
+[2017-06-01 10:14:08,260] [12 ] [INFO ] - Engine is still running...
+[2017-06-01 10:14:08,265] [9  ] [INFO ] - Started [1] thread for monitoring
+[2017-06-01 10:14:08,347] [9  ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-06-01 10:14:08,355] [13 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-06-01 10:14:08,369] [13 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-06-01 10:14:08,370] [13 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-06-01 10:14:08,406] [9  ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-06-01 10:14:09,378] [20 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-06-01 10:14:13,313] [12 ] [INFO ] - Engine is still running...
+[2017-06-01 10:14:18,326] [12 ] [INFO ] - Engine is still running...
+[2017-06-01 10:14:19,269] [14 ] [INFO ] - Crawl for domain [http://www.mapama.gob.es/es/estadistica/temas/estadisticas-agrarias/economia/precios-medios-nacionales/pmn_tabla.asp#] completed successfully in [10.6010077] seconds, crawled [95] pages
+[2017-06-01 10:14:19,273] [18 ] [INFO ] - All ISiteToCrawlConsumer threads have completed
+[2017-06-01 10:14:19,273] [18 ] [INFO ] - All crawls have completed
+[2017-06-01 11:01:27,309] [12 ] [INFO ] - Engine is still running...
+[2017-06-01 11:01:27,309] [10 ] [INFO ] - Started [1] thread for monitoring
+[2017-06-01 11:01:27,324] [10 ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-06-01 11:01:27,334] [10 ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-06-01 11:01:27,337] [13 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-06-01 11:01:27,337] [13 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-06-01 11:01:27,337] [13 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-06-01 11:01:28,340] [20 ] [INFO ] - All ISiteToCrawlProducer threads have completed

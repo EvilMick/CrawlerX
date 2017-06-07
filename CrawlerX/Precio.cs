@@ -4,19 +4,17 @@ namespace CrawlerX
     
     class Precio
     {
-        public int id { get; set; }
-        public string producto { get; set; }
-        public string variedad { get; set; }
+        public string codigo { get; set; }
         public double precio { get; set; }
-        public string unidad_precio { get; set; }
-        public string tipo_precio { get; set; }
-        public string posicion_comercial { get; set; }
+        public int dia { get; set; }
+        public int semana { get; set; }
+        public int numMes { get; set; }
+        public string nomMes { get; set; }
+        public int año { get; set; }
         public string fecha { get; set; }
-        public string campaña { get; set; }
-        public string localizacion { get; set; }
+        public string tipoPrecio { get; set; }
         public string fuente { get; set; }
-        public string moneda { get; set; }
-
+        public string medida { get; set; }
         public Precio()
         {
 

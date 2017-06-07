@@ -26,15 +26,6 @@ namespace CrawlerX
             {
                 Settings = settings
             };
-            if (!elasticClient.IndexExists("agroesi").Exists)
-            {
-                elasticClient.CreateIndex("agroesi", c => c
-                .InitializeUsing(indexConfig)
-                .Mappings(m => m.Map<Precio>(mp => mp.AutoMap())));
-            }
-
-                
-
             return elasticClient;
         }
 

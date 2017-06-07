@@ -14,7 +14,7 @@ namespace CrawlerX
             LectorRSS reader = new LectorRSS();
             DataExcell excell = new DataExcell();
             PDFExtractor pdfextractor = new PDFExtractor();
-            crawler.start_crawler();
+            //crawler.start_crawler();
             do
             {
                 userInput = DisplayMenu();
@@ -27,23 +27,21 @@ namespace CrawlerX
                         break;
                     case 2:
                         //extractor.extraer_datos();
-                        extractor.lonja_albacete();
+                        //extractor.LonjaAlbacete();
+                        extractor.ExtraeNoticias();
                         break;
                     case 3:
-                        reader.RSS_XML();
-
+                        //reader.RSS_XML();
+                        downloader.Manual_Download();
                         break;
                     case 4:
                         excell.read_data();
 
                         break;
-                    case 5:
-                        extractor.limpiar();
 
-                        break;
                     case 6:
-                        pdfextractor.ReadPdfFile();
-
+                        pdfextractor.DatosOvino();
+                        pdfextractor.DatosVacuno();
                         break;
                 }
 
@@ -57,7 +55,6 @@ namespace CrawlerX
             Console.WriteLine("2. Extraer Datos");
             Console.WriteLine("3. Noticias RSS");
             Console.WriteLine("4. Datos ficheros excell");
-            Console.WriteLine("5. Limpiar datos");
             Console.WriteLine("6. Lector pdfs");
             Console.WriteLine("0. Salir");
             var result = Console.ReadLine();

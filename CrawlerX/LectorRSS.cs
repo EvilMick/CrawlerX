@@ -32,14 +32,12 @@ namespace CrawlerX
                     if (i != 0)
                     {
                         Noticia n = new Noticia();
-                        n.id = i;
                         n.titulo = t[i].InnerText;
                         n.link = l[i].InnerText;
                         n.descripcion = description(d[i].InnerText);
                         elasticClient.Index(n, es => es
                                                     .Index("agroesi")
                                                     .Type("noticia")
-                                                    .Id(n.id)
                                         );
                     }                                  
                 }

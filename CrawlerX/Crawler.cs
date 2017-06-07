@@ -21,7 +21,8 @@ namespace CrawlerX
             files = new List<FileItem>();
             siteToCrawlProvider.AddSitesToCrawl(new List<SiteToCrawl>
             {
-                new SiteToCrawl{ Uri = new Uri("http://www.mapama.gob.es/es/estadistica/temas/estadisticas-agrarias/economia/precios-medios-nacionales/pmn_tabla.asp#")}                         
+                new SiteToCrawl{ Uri = new Uri("http://www.mapama.gob.es/es/estadistica/temas/estadisticas-agrarias/economia/precios-medios-nacionales/pmn_tabla.asp#")}
+                //new SiteToCrawl{ Uri = new Uri("http://www.efeagro.com/?cat=3&submit=Buscar&s=+")}
         });
 
             /*
@@ -45,6 +46,8 @@ namespace CrawlerX
             {
                 FileItem fi = new FileItem { Source = new Uri("http://www.mapama.gob.es/es/estadistica/temas/estadisticas-agrarias/economia/precios-medios-nacionales/pmn_tabla.asp#"), Destination = @"C:\Users\Miguel Angel\Documents\Datos\" + "historico0" + ".html" };
                 files.Add(fi);
+                //FileItem fi = new FileItem { Source = new Uri("http://www.efeagro.com/?cat=3&submit=Buscar&s=+"), Destination = @"C:\Users\Miguel Angel\Documents\Datos\RSS\" + "efeagro1" + ".html" };
+                //files.Add(fi);
                 Console.WriteLine("Pulse cualquier tecla e intro para continuar");
                 Console.Read();
             };
@@ -70,6 +73,16 @@ namespace CrawlerX
 
                     }
                     
+                    /*
+                    if (abotEventArgs.CrawledPage.Uri.ToString().Contains("?cat=3"))
+                    {
+                        var name = "efeagro"+i+".html";
+                        FileItem fi = new FileItem { Source = abotEventArgs.CrawledPage.Uri, Destination = @"C:\Users\Miguel Angel\Documents\Datos\RSS\" + name };
+                        files.Add(fi);
+                        i++;
+
+                    }
+                    */
 
 
                 };

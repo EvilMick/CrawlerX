@@ -10,19 +10,237 @@ namespace CrawlerX
     class PDFExtractor
     {
         ElasticClient elasticClient = Broker.EsClient();
+        StringBuilder text = null;
+        PdfReader pdfReader = null;
         public PDFExtractor()
         {
 
         }
-        public void ReadPdfFile()
+        public void DatosOvino()
         {
-            int id = 26015;
-            
-            foreach (string file in Directory.EnumerateFiles("C:/Users/Miguel Angel/Documents/Datos/Lonjas/LonjaTalavera", "*.pdf"))
+
+            string file = "C:/Users/Miguel Angel/Documents/Datos/Lonjas/LonjaTalavera/Ovino/historico_ovino.pdf";
+
+            text = new StringBuilder();
+            pdfReader = new PdfReader(file);
+            for (int page = 1; page <= pdfReader.NumberOfPages; page++)
             {
-                StringBuilder text = new StringBuilder();
-                PdfReader pdfReader = new PdfReader(file);
-                int contador = 0;              
+
+                ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
+                string currentText = PdfTextExtractor.GetTextFromPage(pdfReader, page, strategy);
+                currentText = Encoding.UTF8.GetString(ASCIIEncoding.Convert(Encoding.Default, Encoding.UTF8, Encoding.Default.GetBytes(currentText)));
+                text.Append(currentText);
+
+            }
+            pdfReader.Close();
+            string tabla = text.ToString();
+            string[] filas = tabla.Split('\n');
+            for (int i = 0; i < filas.Length; i++)
+            {
+                string[] partes = null;
+                if (filas[i].ToLower().Contains("leche") && filas[i].ToLower().Contains("cabra"))
+                {
+                    string codigo = "LC";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+
+
+                }
+                if (filas[i].ToLower().Contains("leche") && filas[i].ToLower().Contains("oveja") && filas[i].ToLower().Contains("con"))
+                {
+                    string codigo = "LOCDO";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+
+                }
+                if (filas[i].ToLower().Contains("leche") && filas[i].ToLower().Contains("oveja") && filas[i].ToLower().Contains("sin") && !filas[i].ToLower().Contains("alfalfa"))
+                {
+                    string codigo = "LOSDO";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+                }
+                if (filas[i].ToLower().Contains("cabrito") && filas[i].ToLower().Contains("basto"))
+                {
+                    string codigo = "C7B10";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+                }
+                if (filas[i].ToLower().Contains("cabrito") && filas[i].ToLower().Contains("fino"))
+                {
+                    string codigo = "C7F9";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+                }
+                if (filas[i].ToLower().Contains("cordero") && filas[i].ToLower().Contains("con") && filas[i].ToLower().Contains("10.5"))
+                {
+                    string codigo = "CM10CI15";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+
+                }
+                if (filas[i].ToLower().Contains("cordero") && filas[i].ToLower().Contains("con") && filas[i].ToLower().Contains("15.1"))
+                {
+                    string codigo = "CM15CI19";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+                }
+                if (filas[i].ToLower().Contains("cordero") && filas[i].ToLower().Contains("con") && filas[i].ToLower().Contains("19.1"))
+                {
+                    string codigo = "CM19CI23";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+                }
+                if (filas[i].ToLower().Contains("cordero") && filas[i].ToLower().Contains("con") && filas[i].ToLower().Contains("23.1"))
+                {
+                    string codigo = "CM23CI25";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+                }
+                if (filas[i].ToLower().Contains("cordero") && filas[i].ToLower().Contains("con") && filas[i].ToLower().Contains("25.5"))
+                {
+                    string codigo = "CM25CI28";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+                }
+                if (filas[i].ToLower().Contains("cordero") && filas[i].ToLower().Contains("con") && filas[i].ToLower().Contains("28.1"))
+                {
+                    string codigo = "CM28CI34";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+                }
+                if (filas[i].ToLower().Contains("cordero") && filas[i].ToLower().Contains("con") && filas[i].ToLower().Contains("media"))
+                {
+                    string codigo = "CMCIM10";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+                }
+                if (filas[i].ToLower().Contains("cordero") && filas[i].ToLower().Contains("sin") && filas[i].ToLower().Contains("10.5"))
+                {
+                    string codigo = "CSI10YO15";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+                }
+                if (filas[i].ToLower().Contains("cordero") && filas[i].ToLower().Contains("sin") && filas[i].ToLower().Contains("15.1"))
+                {
+                    string codigo = "CSI15YO19";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+                }
+                if (filas[i].ToLower().Contains("cordero") && filas[i].ToLower().Contains("sin") && filas[i].ToLower().Contains("19.1"))
+                {
+                    string codigo = "CSI19YO23";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+                }
+                if (filas[i].ToLower().Contains("cordero") && filas[i].ToLower().Contains("sin") && filas[i].ToLower().Contains("23.1"))
+                {
+                    string codigo = "CSI23YO25";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+                }
+                if (filas[i].ToLower().Contains("cordero") && filas[i].ToLower().Contains("sin") && filas[i].ToLower().Contains("25.1"))
+                {
+                    string codigo = "CSI25YO28";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+                }
+                if (filas[i].ToLower().Contains("cordero") && filas[i].ToLower().Contains("sin") && filas[i].ToLower().Contains("28.1"))
+                {
+                    string codigo = "CSI28YO34";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+                }
+                if (filas[i].ToLower().Contains("cordero") && filas[i].ToLower().Contains("sin") && filas[i].ToLower().Contains("media"))
+                {
+                    string codigo = "CSIYOM10";
+                    partes = filas[i].Split(' ');
+                    PreciosOvino(partes, codigo);
+
+                }
+
+            }
+
+
+
+
+        }
+        public void PreciosOvino(string[] partes, string code)
+        {
+            int año = 0;
+            int num_mes = 0;
+            string nom_mes = null;
+            int semana = 0;
+            int dia = 0;
+            string medida = null;
+            double max = 0;
+            double min = 0;
+            string fecha = null;
+
+            Precio p1 = new Precio();
+            Precio p2 = new Precio();
+            año = System.Convert.ToInt16(partes[partes.Length - 1]);
+            num_mes = System.Convert.ToInt16(partes[partes.Length - 2]);
+            nom_mes = partes[partes.Length - 3];
+            semana = System.Convert.ToInt16(partes[partes.Length - 4]);
+            dia = System.Convert.ToInt16(partes[partes.Length - 5]);
+            medida = partes[partes.Length - 6];
+            max = double.Parse(partes[partes.Length - 7]);
+            min = double.Parse(partes[partes.Length - 8]);
+            fecha = dia + "-" + CompruebaMes(num_mes) + "-" + año;
+            p1.codigo = code;
+            p1.precio = max;
+            p1.dia = dia;
+            p1.semana = semana;
+            p1.numMes = num_mes;
+            p1.nomMes = nom_mes;
+            p1.año = año;
+            p1.fecha = fecha;
+            p1.tipoPrecio = "max";
+            p1.fuente = "Talavera";
+            p1.medida = medida;
+            
+            p2.codigo = code;
+            p2.precio = min;
+            p2.dia = dia;            
+            p2.semana = semana;
+            p2.numMes = num_mes;
+            p2.nomMes = nom_mes;
+            p2.año = año;
+            p2.fecha = fecha;                      
+            p2.tipoPrecio = "min";
+            p2.fuente = "Talavera";            
+            p2.medida = medida;
+            partes = null;
+            GuardaPrecio(p1);
+            GuardaPrecio(p2);
+
+
+        }
+        public void DatosVacuno()
+        {
+            foreach (string file in Directory.EnumerateFiles("C:/Users/Miguel Angel/Documents/Datos/Lonjas/LonjaTalavera/Vacuno", "*.pdf"))
+            {
+                text = new StringBuilder();
+                pdfReader = new PdfReader(file);
+                int contador = 0;
                 for (int page = 1; page <= pdfReader.NumberOfPages; page++)
                 {
                     if (contador == 0)
@@ -33,148 +251,195 @@ namespace CrawlerX
                         text.Append(currentText);
                     }
                     contador++;
-                    
+
                 }
                 pdfReader.Close();
-                string[] partes_fecha = file.Split('_');
-                string[] partes_año = partes_fecha[1].Split('.');
-                string campaña = partes_año[0];
                 string tabla = text.ToString();
                 string[] filas = tabla.Split('\n');
                 for (int i = 0; i < filas.Length; i++)
                 {
-                    if (filas[i].ToLower().Contains("cordero") && filas[i].ToLower().Contains("kg"))
+                    if (filas[i].ToLower().Contains("ternero") && filas[i].ToLower().Contains("cruzado") && filas[i].ToLower().Contains("base"))
                     {
-                        string[] subpartes = filas[i].Split('.');
-                        string producto = subpartes[0];
-                        string[] subproductos = producto.Split(' ');
-                        string nombre = subproductos[0];
-                        string variedad = null;
-                        for (int j = 1; j <= subproductos.Length - 1; j++)
+                        if (filas[i].ToLower().Contains("1ª"))
                         {
-                            variedad = variedad + " " + subproductos[j];
+                            string codigo1 = "TO200C1";
+                            string[] partes = filas[i].Split(' ');
+                            PreciosVacuno(partes, codigo1, file);
+
                         }
-                        variedad = variedad.Trim(' ');
-                        List<double> precios = new List<double>();
-                        precios = extrae_precios(subpartes[1]);
-                        for (int l=0;l<precios.Count;l++)
+                        else
                         {
-                            Precio p = new Precio();
-                            p.id = id;
-                            p.producto = producto;
-                            p.variedad = variedad;
-                            p.precio = precios[l];
-                            p.campaña = campaña;
-                            p.fecha = "Mes " + (l + 1);
-                            actualiza_precio(p);
-                            guarda_precio(p);
-                            id++;
+                            string codigo2 = "TO200C2";
+                            string[] partes = filas[i].Split(' ');
+                            PreciosVacuno(partes, codigo2, file);
                         }
 
 
                     }
-                    if (filas[i].ToLower().Contains("cabrito") && filas[i].ToLower().Contains("lechal"))
+                    if (filas[i].ToLower().Contains("ternera") && filas[i].ToLower().Contains("cruzada") && filas[i].ToLower().Contains("base"))
                     {
-                        string[] subpartes = filas[i].Split(' ');
-                        string producto = subpartes[0];
-                        string variedad = subpartes[1];
-                        List<double> precios = new List<double>();
-                        for (int j = 2; j < subpartes.Length; j++)
+                        if (filas[i].ToLower().Contains("1ª"))
                         {
-                            if (subpartes[j]!="")
-                            {
-                                precios.Add(double.Parse(subpartes[j]));
-                            }
+                            string codigo1 = "TA200C1";
+                            string[] partes = filas[i].Split(' ');
+                            PreciosVacuno(partes, codigo1, file);
+                        }
+                        else
+                        {
+                            string codigo2 = "TA200C2";
+                            string[] partes = filas[i].Split(' ');
+                            PreciosVacuno(partes, codigo2, file);
+                        }
 
-                        }
-                        for (int l = 0; l < precios.Count; l++)
-                        {
-                            Precio p = new Precio();
-                            p.id = id;
-                            p.producto = producto;
-                            p.variedad = variedad;
-                            p.precio = precios[l];
-                            p.campaña = campaña;
-                            p.fecha = "Mes " + (l + 1);
-                            actualiza_precio(p);
-                            guarda_precio(p);
-                            id++;
-                        }
+
 
                     }
-                    if ((filas[i].ToLower().Contains("ternero")|| filas[i].ToLower().Contains("ternera")) && filas[i].ToLower().Contains("base"))
+                    if (filas[i].ToLower().Contains("ternero") && filas[i].ToLower().Contains("pais") && filas[i].ToLower().Contains("base"))
                     {
-                        string[] subproductos = filas[i].ToLower().Split(' ');
-                        string nombre = subproductos[0];
-                        string variedad = null;
-                        for (int j = 1; j <= 5; j++)
-                        {
-                            variedad = variedad + " " + subproductos[j];
-                        }
-                        variedad = variedad.Trim(' ');
-                        List<double> precios = new List<double>();
-                        for (int j = 6; j < subproductos.Length; j++)
-                        {
-                            if (subproductos[j] != "")
-                            {
-                                precios.Add(double.Parse(subproductos[j]));
-                            }
-
-                        }
-                        for (int l = 0; l < precios.Count; l++)
-                        {
-                            Precio p = new Precio();
-                            p.id = id;
-                            p.producto = nombre;
-                            p.variedad = variedad;
-                            p.precio = precios[l];
-                            p.campaña = campaña;
-                            p.fecha = "Mes " + (l + 1);
-                            actualiza_precio(p);
-                            guarda_precio(p);
-                            id++;
-                        }
+                        string codigo = "TO200PA";
+                        string[] partes = filas[i].Split(' ');
+                        PreciosVacuno(partes, codigo, file);
 
                     }
-
+                    if (filas[i].ToLower().Contains("ternera") && filas[i].ToLower().Contains("pais") && filas[i].ToLower().Contains("base"))
+                    {
+                        string[] partes = filas[i].Split(' ');
+                        string codigo = "TA200PA";
+                        PreciosVacuno(partes, codigo, file);
+                    }
                 }
-
-           }
-
-
-        }
-        public List<double> extrae_precios(string precios_fila)
-        {
-            List<double> precios = new List<double>();
-            precios_fila.Trim(' ');
-            string[] partes = precios_fila.Split(' ');
-            for (int i = 1; i < partes.Length; i++)
-            {
-                if (partes[i]!="")
-                {
-                    precios.Add(double.Parse(partes[i]));
-                }
-                
             }
-            return precios;
+        }
+        public void PreciosVacuno(string[] partes, string code, string file)
+        {
+            string[] partes_nombre = file.Split('_');
+            string[] nombre = partes_nombre[1].Split('.');
+            int año = System.Convert.ToInt16(nombre[0]);
+            int num_mes = 0;
+            string nom_mes = null;
+            int semana = 0;
+            int dia = 25;
+            string medida = "Euros/kg";
+            string tipo_precio = "med";
+            string fecha = null;
+
+
+
+            List<double> precios = new List<double>();
+            for (int j = 6; j < partes.Length; j++)
+            {
+                if (partes[j] != "" && partes[j].Contains("."))
+                {
+                    string[] datos = partes[j].Split('.');
+                    string dato = datos[0] + "," + datos[1];
+                    precios.Add(double.Parse(dato));
+                }
+                if (partes[j] != "" && !partes[j].Contains("."))
+                {
+                    precios.Add(double.Parse(partes[j]));
+                }
+                if (partes[j] == "")
+                {
+                    precios.Add(0);
+                }
+
+            }
+            int contador = 1;
+            foreach (double dato in precios)
+            {
+                num_mes = contador;
+                nom_mes = mes(contador);
+                fecha = dia + "-" + CompruebaMes(num_mes) + "-" + año;
+                contador++;
+                Precio p = new Precio();
+                p.codigo = code;
+                p.precio = dato;
+                p.dia = dia;
+                p.semana = semana;
+                p.numMes = num_mes;
+                p.nomMes = nom_mes;               
+                p.año = año;
+                p.fecha = fecha;
+                p.tipoPrecio = tipo_precio;
+                p.fuente = "Talavera";
+                p.medida = medida;
+                GuardaPrecio(p);
+            }
+
 
         }
-        public void actualiza_precio(Precio p)
+        public string CompruebaMes(int mes)
         {
-            p.posicion_comercial = "Lonja Talavera";
-            p.localizacion = "Talavera de la Reina";
-            p.fuente = "Lonja Talavera";
-            p.moneda = "Euro";
-            p.unidad_precio = "Euro/kg";
-            p.tipo_precio = "Precio medio";
+            string month = null;
+            if (mes < 10)
+            {
+                month = "0" + mes;
+            }
+            else
+            {
+                month = string.Concat(mes);
+            }
+            return month;
         }
-        public void guarda_precio(Precio p)
+        public string mes(int posicion)
+        {
+            string mes = null;
+            switch (posicion)
+            {
+                case 1:
+                    mes = "enero";
+                    break;
+                case 2:
+                    mes = "febrero";
+                    break;
+                case 3:
+                    mes = "marzo";
+                    break;
+                case 4:
+                    mes = "abril";
+                    break;
+                case 5:
+                    mes = "mayo";
+                    break;
+                case 6:
+                    mes = "junio";
+                    break;
+                case 7:
+                    mes = "julio";
+                    break;
+                case 8:
+                    mes = "agosto";
+                    break;
+                case 9:
+                    mes = "septiembre";
+                    break;
+                case 10:
+                    mes = "octubre";
+                    break;
+                case 11:
+                    mes = "noviembre";
+                    break;
+                case 12:
+                    mes = "diciembre";
+                    break;
+                case 13:
+                    mes = "media";
+                    break;
+            }
+
+
+
+
+            return mes;
+        }
+        public void GuardaPrecio(Precio p)
         {
             elasticClient.Index(p, es => es
-                                                    .Index("agroesi")
-                                                    .Type("precio")
-                                                    .Id(p.id)
-                                        );
+                                            .Index("agroesi")
+                                           .Type("precio")
+                              );
         }
+
+
     }
 }
