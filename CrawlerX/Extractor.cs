@@ -3,14 +3,16 @@ using Nest;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Net;
 
 namespace CrawlerX
 {
     class Extractor
     {
         ElasticClient elasticClient = Broker.EsClient();
-
+        char[] MyChar = { '\n', '\r', ' ', '\t', '.', ',', 'y' };
         public Extractor()
         {
 
@@ -186,65 +188,77 @@ namespace CrawlerX
             }
 
         }
-        public void ExtraeNoticias()
+        public void NoticiasGanaderia()
         {
-            foreach (string file in Directory.EnumerateFiles("C:/Users/Miguel Angel/Documents/Datos/RSS/", "*.html"))
+            List<string> titulos = new List<string>();
+            foreach (string file in Directory.EnumerateFiles("C:/Users/Miguel Angel/Documents/Datos/RSS/Ganaderia/", "*.html"))
             {
                 string contents = File.ReadAllText(file, System.Text.Encoding.UTF8);
                 var parser = new HtmlParser();
                 var document = parser.Parse(contents);
-
                 var noticias = document.GetElementsByClassName("itemContainer itemContainerLast");
+
                 foreach (var noticia in noticias)
                 {
                     Noticia n = new Noticia();
-                    List<string> etiquetas = new List<string>();
+                    string etiquetas = "";
                     var titulo = noticia.GetElementsByClassName("catItemTitle")[0].TextContent.Trim(' ');
                     var links = noticia.GetElementsByTagName("a");
                     var link = links[0];
                     var enlace = "https://www.oviespana.com" + link.GetAttribute("href");
                     string imagen = "Imagen no disponible";
                     string[] etiquetas_aux = new string[4];
-                    if (noticia.GetElementsByClassName("catItemImage").Length>0)
+                    if (noticia.GetElementsByClassName("catItemImage").Length > 0)
                     {
                         imagen = "https://www.oviespana.com" + noticia.GetElementsByClassName("catItemImage")[0].GetElementsByTagName("img")[0].GetAttribute("src").ToString();
                     }
                     string descripcion = noticia.GetElementsByClassName("catItemIntroText")[0].TextContent;
                     var fecha = noticia.GetElementsByClassName("catItemDateCreated")[0].TextContent.Split(',')[1].Trim(' ').Split(' ');
-                    if (noticia.GetElementsByClassName("catItemTags").Length>0)
+                    if (noticia.GetElementsByClassName("catItemTags").Length > 0)
                     {
                         etiquetas_aux = noticia.GetElementsByClassName("catItemTags")[0].TextContent.Trim(' ').Split(' ');
-                    }else
-                    {
-                        etiquetas_aux[0] = "otro";
-                        etiquetas_aux[1] = "otro";
                     }
-                    
+                    else
+                    {
+
+                        string content = extraecontenido(enlace);
+                        etiquetas = EtiquetasOviEspa(content);
+                    }
+
                     foreach (string etiqueta in etiquetas_aux)
                     {
-                        if (etiqueta != "" && etiqueta!=null)
+                        if (etiqueta != "" && etiqueta != null)
                         {
-                            etiquetas.Add(etiqueta.ToLower());
+                            etiquetas = etiquetas + etiqueta.ToLower() + ",";
                         }
 
                     }
+                    etiquetas = etiquetas.Trim(MyChar);
                     int dia = System.Convert.ToInt16(fecha[0]);
                     string nom_mes = fecha[1].ToLower();
                     int año = System.Convert.ToInt16(fecha[2]);
+                    string date = fecha[0] + "-" + ConvierteMes(nom_mes) + "-" + año;
+                    if (etiquetas!="")
+                    {
+                        n.codigo = "GN";
+                        n.titulo = titulo;
+                        n.link = enlace;
+                        n.descripcion = descripcion;
+                        n.imagen = imagen;
+                        n.dia = dia;
+                        n.nomMes = nom_mes;
+                        n.numMes = System.Convert.ToInt16(ConvierteMes(nom_mes));
+                        n.año = año;
+                        n.fecha = date;
+                        n.etiquetas = etiquetas;
+                        if (!titulos.Contains(n.titulo))
+                        {
+                            GuardaNoticia(n);
+                            titulos.Add(n.titulo);
+                        }
+                    }
+                    
 
-                    string date = dia + "-" +ConvierteMes(nom_mes)+"-"+año;
-
-                    n.titulo = titulo;
-                    n.link = enlace;
-                    n.descripcion = descripcion;
-                    n.imagen = imagen;
-                    n.dia = dia;
-                    n.nomMes = nom_mes;
-                    n.numMes = System.Convert.ToInt16(ConvierteMes(nom_mes));
-                    n.año = año;
-                    n.fecha = date;
-                    EtiquetaNoticias(etiquetas, n);
-                    GuardaNoticia(n);
                 }
 
             }
@@ -316,10 +330,10 @@ namespace CrawlerX
                 fecha = semana.TextContent;
                 string[] partes = fecha.Split('.');
                 string[] partes_fecha = partes[0].Split(' ');
-                string [] partes_semana = partes[1].Trim(' ').Split(' ');
+                string[] partes_semana = partes[1].Trim(' ').Split(' ');
                 int n_semana = System.Convert.ToInt16(partes_semana[1]);
                 string[] comp_fecha = partes_fecha[3].Split('/');
-                fecha = comp_fecha[0]+"-" +comp_fecha[1] + "-" + comp_fecha[2];
+                fecha = comp_fecha[0] + "-" + comp_fecha[1] + "-" + comp_fecha[2];
                 fechas.Add(fecha);
                 num_semana.Add(n_semana);
 
@@ -334,7 +348,7 @@ namespace CrawlerX
                     {
 
                         string codigo = "LC";
-                        CreaPrecio(codigo, celdas[3].TextContent,celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador],num_semana[contador]);
+                        CreaPrecio(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador]);
 
                     }
                     if (celdas[1].TextContent.ToLower().Contains("leche") && celdas[1].TextContent.ToLower().Contains("oveja") && celdas[1].TextContent.ToLower().Contains("con"))
@@ -466,64 +480,7 @@ namespace CrawlerX
                 }
                 contador++;
             }
-           
 
-        }
-        public void EtiquetaNoticias(List<string> etiquetas, Noticia n)
-        {
-            bool fin = false;
-            while (!fin)
-            {
-                if (!etiquetas.Contains("ovino") && etiquetas.Contains("caprino"))
-                {
-                    n.categoria1 = "caprino";
-                }
-                if (!etiquetas.Contains("caprino") && etiquetas.Contains("ovino"))
-                {
-                    n.categoria1 = "ovino";
-                }
-                if (etiquetas.Contains("caprino") && etiquetas.Contains("ovino"))
-                {
-                    n.categoria1 = "ovinocaprino";
-                }
-                if (!etiquetas.Contains("caprino") && !etiquetas.Contains("ovino"))
-                {
-                    n.categoria1 = "otro";
-                }
-                if (etiquetas.Contains("precios"))
-                {
-                    n.categoria2 = "precios";
-                }
-                if (etiquetas.Contains("produccion"))
-                {
-                    n.categoria2 = "produccion";
-                }
-                if (etiquetas.Contains("leche"))
-                {
-                    n.categoria2 = "leche";
-                }
-                if (etiquetas.Contains("importaciones"))
-                {
-                    n.categoria2 = "importaciones";
-                }
-                if (etiquetas.Contains("exportaciones"))
-                {
-                    n.categoria2 = "exportaciones";
-                }
-                if (etiquetas.Contains("carne"))
-                {
-                    n.categoria2 = "carne";
-                }
-                if (n.categoria1 != null && n.categoria2 != null)
-                {
-                    fin = true;
-                }
-                if (n.categoria2 == null)
-                {
-                    n.categoria2 = "otro";
-                }
-
-            }
 
         }
         public string ConvierteMesInv(string dato)
@@ -607,16 +564,361 @@ namespace CrawlerX
         public void GuardaPrecio(Precio p)
         {
             elasticClient.Index(p, es => es
-                                            .Index("agroesi")
-                                           .Type("precio")
+                                 .Index("agroesi")
+                                 .Type("precio")
                               );
         }
         public void GuardaNoticia(Noticia n)
         {
             elasticClient.Index(n, es => es
-                                            .Index("agroesi")
+                                            .Index("rss")
                                            .Type("noticia")
                               );
         }
+        public void BalanceArroz()
+        {
+            string contenido = File.ReadAllText("C:/Users/Miguel Angel/Documents/Datos/Mapama/Arroz/BalanceArroz.txt");
+            string[] filas = contenido.Split('\n');
+            for (int i = 1; i < 7; i++)
+            {
+                string[] datos = filas[i].Trim('\r').Split(',');
+                string campaña = datos[0];
+                string code = "AZ";
+                double superficie = double.Parse(datos[1]);
+                double produccion = double.Parse(datos[2]);
+                double importaciones = double.Parse(datos[3]);
+                double exportaciones = double.Parse(datos[4]);
+                Estadistica e = new Estadistica();
+                e.campaña = campaña;
+                e.codigo = code;
+                e.superficie = superficie;
+                e.produccion = produccion;
+                e.importacines = importaciones;
+                e.exportaciones = exportaciones;
+                GuardaEstadistica(e);
+            }
+        }
+        public void GuardaEstadistica(Estadistica e)
+        {
+            elasticClient.Index(e, es => es
+                                            .Index("cereales")
+                                           .Type("estadistica")
+                              );
+        }
+        public void Soja()
+        {
+            string contents = File.ReadAllText("C:/Users/Miguel Angel/Documents/Datos/Mapama/Soja/Soja.html", System.Text.Encoding.UTF8);
+            var parser = new HtmlParser();
+            var document = parser.Parse(contents);
+
+            var tabla = document.GetElementsByClassName("tblData");
+            var filas = tabla[0].GetElementsByTagName("tr");
+
+            int dia = 15;
+            string code = "SJ";
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            Calendar cal = dfi.Calendar;
+
+            for (int i = 1; i < 122; i++)
+            {
+                var celdas = filas[i].Children;
+                string mes = celdas[0].TextContent;
+                double precio = double.Parse(celdas[1].TextContent);
+
+                string[] parFecha = mes.Split('.');
+                string nom_mes = CompletaMes(parFecha[0]);
+                int num_mes = System.Convert.ToInt16(ConvierteMes(nom_mes));
+                int año = System.Convert.ToInt16(parFecha[1].Trim());
+                string fecha = dia + "-" + ConvierteMes(nom_mes) + "-" + año.ToString().Substring(2);
+
+                DateTime date = new DateTime(año, num_mes, dia);
+                int semana = System.Convert.ToInt16(cal.GetWeekOfYear(date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek).ToString());
+                PrecioSoja(code, precio, dia, nom_mes, num_mes, año, fecha, semana);
+
+
+            }
+        }
+        public string CompletaMes(string dato)
+        {
+            string mes = null;
+            switch (dato)
+            {
+                case "ene":
+                    mes = "enero";
+                    break;
+                case "feb":
+                    mes = "febrero";
+                    break;
+                case "mar":
+                    mes = "marzo";
+                    break;
+                case "abr":
+                    mes = "abril";
+                    break;
+                case "may":
+                    mes = "mayo";
+                    break;
+                case "jun":
+                    mes = "junio";
+                    break;
+                case "jul":
+                    mes = "julio";
+                    break;
+                case "ago":
+                    mes = "agosto";
+                    break;
+                case "sep":
+                    mes = "septiembre";
+                    break;
+                case "oct":
+                    mes = "octubre";
+                    break;
+                case "nov":
+                    mes = "noviembre";
+                    break;
+                case "dic":
+                    mes = "diciembre";
+                    break;
+            }
+
+
+            return mes;
+
+        }
+        public void PrecioSoja(string code, double precio, int dia, string nomMes, int numMes, int año, string fecha, int semana)
+        {
+            Precio p = new Precio();
+            p.codigo = code;
+            p.precio = precio;
+            p.dia = dia;
+            p.semana = semana;
+            p.numMes = numMes;
+            p.nomMes = nomMes;
+            p.año = año;
+            p.fecha = fecha;
+            p.tipoPrecio = "max";
+            p.fuente = "Chicago";
+            p.medida = "Euros/t";
+            GuardaPrecio(p);
+
+        }
+        public void NoticiasAgricultura()
+        {
+            foreach (string file in Directory.EnumerateFiles("C:/Users/Miguel Angel/Documents/Datos/RSS/Agricultura/", "*.html"))
+            {
+                string contents = File.ReadAllText(file, System.Text.Encoding.UTF8);
+                var parser = new HtmlParser();
+                var document = parser.Parse(contents);
+
+                if (file.Contains("agroinfo"))
+                {
+                    var noticias = document.GetElementsByClassName("td-block-span6");
+                    foreach (var noticia in noticias)
+                    {
+                        Noticia n = new Noticia();
+                        var imagen = noticia.GetElementsByClassName("td-module-image");
+                        var titulo = noticia.GetElementsByClassName("entry-title td-module-title");
+                        var meta = noticia.GetElementsByClassName("td-module-meta-info");
+                        var descripcion = noticia.GetElementsByClassName("td-excerpt");
+
+                        string tit = titulo[0].TextContent;
+                        string link = titulo[0].FirstElementChild.GetAttribute("href");
+                        string linkImagen = imagen[0].GetElementsByTagName("img")[0].GetAttribute("src").ToString();
+                        string descrip = descripcion[0].TextContent.Trim(MyChar);
+                        string fecha = meta[0].GetElementsByClassName("td-post-date")[0].TextContent;
+
+                        string[] parFecha = fecha.Split('/');
+                        int dia = System.Convert.ToInt16(parFecha[0]);
+                        int mes = System.Convert.ToInt16(parFecha[1]);
+                        int año = System.Convert.ToInt16(parFecha[2]);
+                        string nomMes = ConvierteMesInv(parFecha[1]);
+                        string contenido = extraecontenido(link);
+                        string etiquetas = EtiquetasAgroinfo(contenido);
+                        n.codigo = "AG";
+                        n.titulo = tit;
+                        n.link = link;
+                        n.descripcion = descrip;
+                        n.etiquetas = etiquetas;
+                        n.imagen = linkImagen;
+                        n.dia = dia;
+                        n.numMes = mes;
+                        n.nomMes = nomMes;
+                        n.año = año;
+                        n.fecha = parFecha[0] + "-" + parFecha[1] + "-" + parFecha[2];
+                        GuardaNoticia(n);
+
+
+                    }
+
+                }
+                else
+                {
+                    var noticias = document.GetElementsByClassName("block igualar");
+                    foreach (var noticia in noticias)
+                    {
+                        Noticia n = new Noticia();
+                        var fecha = noticia.GetElementsByClassName("entry-header");
+                        var imagen = noticia.GetElementsByClassName("img");
+                        var titulo = noticia.GetElementsByClassName("entry-title");
+                        string date = fecha[0].GetElementsByClassName("header-top")[0].TextContent.ToString().Trim(MyChar).Split('\n')[0];
+                        string link = titulo[0].FirstElementChild.GetAttribute("href");
+                        string linkImagen = imagen[0].GetElementsByTagName("img")[0].GetAttribute("src").ToString();
+
+                        string[] parFecha = date.Split(' ');
+                        int dia = System.Convert.ToInt16(parFecha[0]);
+                        int nummes = System.Convert.ToInt16(ConvierteMes(parFecha[1]));
+                        int año = System.Convert.ToInt16(parFecha[2]);
+                        string nomMes = parFecha[1];
+
+                        string contenido = extraecontenido(link);
+                        string etiquetas = EtiquetasEfeagro(contenido);
+
+                        n.codigo = "AG";
+                        n.titulo = titulo[0].TextContent;
+                        n.link = link;
+                        n.descripcion = "";
+                        n.etiquetas = etiquetas;
+                        n.imagen = linkImagen;
+                        n.dia = dia;
+                        n.numMes = nummes;
+                        n.nomMes = nomMes;
+                        n.año = año;
+                        n.fecha = parFecha[0] + "-" + ConvierteMes(parFecha[1]) + "-" + parFecha[2];
+                        GuardaNoticia(n);
+
+                    }
+
+                }
+            }
+
+        }
+        public string EtiquetasAgroinfo(string contenido)
+        {
+            string etiquetas = "";
+            string keys = File.ReadAllText(@"C:\Users\Miguel Angel\Desktop\keywords.txt", System.Text.Encoding.UTF7);
+            string conjuntores = File.ReadAllText(@"C:\Users\Miguel Angel\Desktop\preposiciones.txt", System.Text.Encoding.UTF7);
+            var parser = new HtmlParser();
+            var document = parser.Parse(contenido);
+            var content = document.GetElementsByClassName("td-post-content");
+            string content1 = content[0].TextContent.Trim(MyChar);
+            string[] palabras = content1.Split();
+            int contador = 0;
+            for (int i = 0; i < palabras.Length; i++)
+            {
+               
+                if (palabras[i].Trim(MyChar).ToLower() != "" || palabras[i].Trim(MyChar).ToLower() != " ")
+                {
+                    if (keys.Contains(palabras[i].Trim(MyChar).ToLower()) & contador < 4 & !etiquetas.Contains(palabras[i].ToLower()) & !conjuntores.ToLower().Contains(palabras[i].ToLower()))
+                    {
+                        etiquetas = etiquetas + palabras[i].ToLower().Trim(MyChar) + ",";
+                        contador++;
+                    }
+                }
+            }
+            etiquetas = etiquetas.Trim(MyChar);
+            etiquetas = etiquetas.Trim(MyChar);
+            return etiquetas;
+        }
+        public string EtiquetasEfeagro(string contenido)
+        {
+            string etiquetas = "";
+            string keys = File.ReadAllText(@"C:\Users\Miguel Angel\Desktop\keywords.txt", System.Text.Encoding.UTF7);
+            string conjuntores = File.ReadAllText(@"C:\Users\Miguel Angel\Desktop\preposiciones.txt", System.Text.Encoding.UTF7);
+            var parser = new HtmlParser();
+            var document = parser.Parse(contenido);
+            var content = document.GetElementsByClassName("post-entry");
+            string content1 = content[0].TextContent.Trim(MyChar);
+
+            etiquetas = document.GetElementsByClassName("tags")[0].TextContent.Trim(MyChar);
+            etiquetas = document.GetElementsByClassName("tags")[0].TextContent.Trim(MyChar);
+
+            string[] parEtiquetas = etiquetas.Split('\n');
+            if (parEtiquetas.Length != 1)
+            {
+                etiquetas = parEtiquetas[0].Substring(15).Trim(MyChar);
+            }
+            else
+            {
+                int contador = 0;
+                string[] palabras = content1.Split();
+                for (int i = 0; i < palabras.Length; i++)
+                {
+
+                    if (palabras[i].Trim(MyChar).ToLower() != "" || palabras[i].Trim(MyChar).ToLower() != " ")
+                    {
+                        if (keys.Contains(palabras[i].Trim(MyChar).ToLower()) & contador < 4 & !etiquetas.Contains(palabras[i].ToLower()) & !conjuntores.ToLower().Contains(palabras[i].ToLower()))
+                        {
+                            etiquetas = etiquetas + palabras[i].ToLower().Trim(MyChar) + ",";
+                            contador++;
+                        }
+                    }
+                }
+                if (etiquetas.Length > 25)
+                {
+                    etiquetas = etiquetas.Substring(25);
+                }
+
+            }
+
+            etiquetas = etiquetas.Trim(MyChar);
+            etiquetas = etiquetas.Trim(MyChar);
+            return etiquetas;
+        }
+        public string EtiquetasOviEspa(string contenido)
+        {
+            string etiquetas = "";
+            if (contenido != null)
+            {
+                string keys = File.ReadAllText(@"C:\Users\Miguel Angel\Desktop\keyganaderia.txt", System.Text.Encoding.UTF7);
+                string conjuntores = File.ReadAllText(@"C:\Users\Miguel Angel\Desktop\preposiciones.txt", System.Text.Encoding.UTF7);
+
+                var parser = new HtmlParser();
+                var document = parser.Parse(contenido);
+                var content = document.GetElementsByClassName("itemFullText");
+
+                string content1 = content[0].TextContent.Trim(MyChar);
+                string[] palabras = contenido.Split();
+                int contador = 0;
+                for (int i = 0; i < palabras.Length; i++)
+                {
+
+                    if (palabras[i].Trim(MyChar).ToLower() != "" || palabras[i].Trim(MyChar).ToLower() != " ")
+                    {
+                        if (keys.Contains(palabras[i].Trim(MyChar).ToLower()) & contador < 4 & !etiquetas.Contains(palabras[i].ToLower()) & !conjuntores.ToLower().Contains(palabras[i].ToLower()))
+                        {
+                            if (!etiquetas.Contains(palabras[i].ToLower().Trim(MyChar)))
+                            {
+                                etiquetas = etiquetas + palabras[i].ToLower().Trim(MyChar) + ",";
+                                contador++;
+                            }
+
+                        }
+                    }
+                }
+
+                etiquetas = etiquetas.Trim(MyChar);
+            }          
+            return etiquetas;
+        }
+        public string extraecontenido(string link)
+        {
+            string contenido = null; ;                      
+            try
+            {
+                WebRequest req = HttpWebRequest.Create(link);
+                req.Method = "GET";
+                using (StreamReader reader = new StreamReader(req.GetResponse().GetResponseStream()))
+                {
+                    contenido = reader.ReadToEnd();
+                }
+
+            }
+            catch (Exception ex) { }
+               
+            return contenido;
+        }
     }
 }
+        
+        
+

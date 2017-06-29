@@ -116,6 +116,7 @@
     <Compile Include="Crawler.cs" />
     <Compile Include="DataExcell.cs" />
     <Compile Include="Downloader.cs" />
+    <Compile Include="Estadistica.cs" />
     <Compile Include="Extractor.cs" />
     <Compile Include="FileItem.cs" />
     <Compile Include="LectorRSS.cs" />
