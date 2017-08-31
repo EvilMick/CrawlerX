@@ -1891,3 +1891,207 @@
 [2017-06-01 11:01:27,337] [13 ] [INFO ] - Retrieved [1] sites to crawl
 [2017-06-01 11:01:27,337] [13 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
 [2017-06-01 11:01:28,340] [20 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-17 20:22:31,962] [9  ] [INFO ] - Started [1] thread for monitoring
+[2017-07-17 20:22:31,963] [12 ] [INFO ] - Engine is still running...
+[2017-07-17 20:22:32,039] [9  ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-17 20:22:32,069] [13 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-17 20:22:32,078] [13 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-17 20:22:32,085] [13 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-17 20:22:32,107] [9  ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-17 20:22:33,094] [19 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-17 20:22:37,438] [12 ] [INFO ] - Engine is still running...
+[2017-07-17 20:22:42,654] [12 ] [INFO ] - Engine is still running...
+[2017-07-17 20:22:46,131] [14 ] [INFO ] - Crawl for domain [https://www.tutiempo.net/clima/ws-83480.html] completed successfully in [13.5341316] seconds, crawled [85] pages
+[2017-07-17 20:22:46,238] [18 ] [INFO ] - All ISiteToCrawlConsumer threads have completed
+[2017-07-17 20:22:46,262] [18 ] [INFO ] - All crawls have completed
+[2017-07-17 20:24:13,452] [9  ] [INFO ] - Started [1] thread for monitoring
+[2017-07-17 20:24:13,452] [12 ] [INFO ] - Engine is still running...
+[2017-07-17 20:24:13,506] [9  ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-17 20:24:13,555] [9  ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-17 20:24:13,555] [13 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-17 20:24:13,555] [13 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-17 20:24:13,555] [13 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-17 20:24:22,273] [12 ] [INFO ] - Engine is still running...
+[2017-07-17 20:26:05,486] [10 ] [INFO ] - Started [1] thread for monitoring
+[2017-07-17 20:26:05,487] [13 ] [INFO ] - Engine is still running...
+[2017-07-17 20:26:05,550] [10 ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-17 20:26:05,607] [14 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-17 20:26:05,612] [14 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-17 20:26:05,616] [14 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-17 20:26:05,661] [10 ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-17 20:26:06,633] [18 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-17 20:26:23,528] [13 ] [INFO ] - Engine is still running...
+[2017-07-17 20:26:36,469] [13 ] [INFO ] - Engine is still running...
+[2017-07-17 20:27:07,015] [10 ] [INFO ] - Started [1] thread for monitoring
+[2017-07-17 20:27:07,016] [13 ] [INFO ] - Engine is still running...
+[2017-07-17 20:27:07,164] [10 ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-17 20:27:07,226] [14 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-17 20:27:07,237] [14 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-17 20:27:07,238] [14 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-17 20:27:07,335] [10 ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-17 20:27:10,568] [20 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-17 20:27:14,553] [13 ] [INFO ] - Engine is still running...
+[2017-07-17 20:28:07,673] [14 ] [INFO ] - Engine is still running...
+[2017-07-17 20:28:07,673] [11 ] [INFO ] - Started [1] thread for monitoring
+[2017-07-17 20:28:07,704] [11 ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-17 20:28:07,735] [11 ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-17 20:28:07,735] [15 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-17 20:28:07,735] [15 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-17 20:28:07,735] [15 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-17 20:28:08,762] [19 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-17 20:28:18,590] [14 ] [INFO ] - Engine is still running...
+[2017-07-17 20:28:24,849] [14 ] [INFO ] - Engine is still running...
+[2017-07-17 20:28:38,202] [14 ] [INFO ] - Engine is still running...
+[2017-07-17 20:28:55,040] [14 ] [INFO ] - Engine is still running...
+[2017-07-17 20:38:55,189] [11 ] [INFO ] - Engine is still running...
+[2017-07-17 20:38:55,189] [8  ] [INFO ] - Started [1] thread for monitoring
+[2017-07-17 20:38:55,230] [8  ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-17 20:38:55,252] [12 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-17 20:38:55,255] [12 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-17 20:38:55,256] [12 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-17 20:38:55,270] [8  ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-17 20:38:56,261] [17 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-17 20:39:11,141] [11 ] [INFO ] - Engine is still running...
+[2017-07-17 20:39:27,237] [11 ] [INFO ] - Engine is still running...
+[2017-07-17 20:39:32,365] [11 ] [INFO ] - Engine is still running...
+[2017-07-17 20:39:36,710] [13 ] [INFO ] - Crawl for domain [https://www.tutiempo.net/clima/ws-83480.html] completed successfully in [41.2841402] seconds, crawled [85] pages
+[2017-07-17 20:39:36,718] [17 ] [INFO ] - All ISiteToCrawlConsumer threads have completed
+[2017-07-17 20:39:36,718] [17 ] [INFO ] - All crawls have completed
+[2017-07-17 20:40:19,840] [12 ] [INFO ] - Engine is still running...
+[2017-07-17 20:40:19,840] [7  ] [INFO ] - Started [1] thread for monitoring
+[2017-07-17 20:40:19,873] [7  ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-17 20:40:19,892] [7  ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-17 20:40:19,900] [13 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-17 20:40:19,901] [13 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-17 20:40:19,902] [13 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-17 20:40:20,906] [19 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-17 20:40:24,965] [12 ] [INFO ] - Engine is still running...
+[2017-07-17 20:40:30,029] [12 ] [INFO ] - Engine is still running...
+[2017-07-17 20:40:32,809] [14 ] [INFO ] - Crawl for domain [https://www.tutiempo.net/clima/ws-83480.html] completed successfully in [12.7523081] seconds, crawled [85] pages
+[2017-07-17 20:40:32,816] [17 ] [INFO ] - All ISiteToCrawlConsumer threads have completed
+[2017-07-17 20:40:32,817] [17 ] [INFO ] - All crawls have completed
+[2017-07-18 13:53:40,068] [10 ] [INFO ] - Started [1] thread for monitoring
+[2017-07-18 13:53:40,069] [6  ] [INFO ] - Engine is still running...
+[2017-07-18 13:53:40,116] [10 ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-18 13:53:40,146] [13 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-18 13:53:40,163] [13 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-18 13:53:40,170] [13 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-18 13:53:40,182] [10 ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-18 13:53:41,181] [17 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-18 13:53:45,146] [6  ] [INFO ] - Engine is still running...
+[2017-07-18 13:53:50,446] [6  ] [INFO ] - Engine is still running...
+[2017-07-18 13:53:55,478] [6  ] [INFO ] - Engine is still running...
+[2017-07-18 13:53:58,608] [14 ] [INFO ] - Crawl for domain [https://www.tutiempo.net/clima/ws-83480.html] completed successfully in [18.1669078] seconds, crawled [85] pages
+[2017-07-18 13:53:58,616] [18 ] [INFO ] - All ISiteToCrawlConsumer threads have completed
+[2017-07-18 13:53:58,620] [18 ] [INFO ] - All crawls have completed
+[2017-07-24 12:37:02,217] [10 ] [INFO ] - Started [1] thread for monitoring
+[2017-07-24 12:37:02,217] [12 ] [INFO ] - Engine is still running...
+[2017-07-24 12:37:02,282] [10 ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-24 12:37:02,322] [13 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-24 12:37:02,322] [10 ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-24 12:37:02,326] [13 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-24 12:37:02,336] [13 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-24 12:37:03,469] [19 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-24 12:37:07,281] [12 ] [INFO ] - Engine is still running...
+[2017-07-24 12:38:20,601] [10 ] [INFO ] - Started [1] thread for monitoring
+[2017-07-24 12:38:20,602] [13 ] [INFO ] - Engine is still running...
+[2017-07-24 12:38:20,654] [10 ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-24 12:38:20,688] [10 ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-24 12:38:20,697] [14 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-24 12:38:20,699] [14 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-24 12:38:20,699] [14 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-24 12:38:21,709] [20 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-24 12:38:25,641] [13 ] [INFO ] - Engine is still running...
+[2017-07-24 12:38:32,480] [13 ] [INFO ] - Engine is still running...
+[2017-07-24 12:39:09,966] [10 ] [INFO ] - Started [1] thread for monitoring
+[2017-07-24 12:39:09,966] [13 ] [INFO ] - Engine is still running...
+[2017-07-24 12:39:10,006] [10 ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-24 12:39:10,033] [10 ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-24 12:39:10,033] [14 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-24 12:39:10,035] [14 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-24 12:39:10,035] [14 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-24 12:39:11,047] [18 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-24 12:39:15,003] [13 ] [INFO ] - Engine is still running...
+[2017-07-24 12:40:36,099] [10 ] [INFO ] - Started [1] thread for monitoring
+[2017-07-24 12:40:36,100] [13 ] [INFO ] - Engine is still running...
+[2017-07-24 12:40:36,133] [10 ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-24 12:40:36,171] [10 ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-24 12:40:36,176] [14 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-24 12:40:36,177] [14 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-24 12:40:36,177] [14 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-24 12:40:37,184] [20 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-24 12:40:41,135] [13 ] [INFO ] - Engine is still running...
+[2017-07-24 12:41:27,389] [10 ] [INFO ] - Started [1] thread for monitoring
+[2017-07-24 12:41:27,389] [13 ] [INFO ] - Engine is still running...
+[2017-07-24 12:41:27,426] [10 ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-24 12:41:27,448] [14 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-24 12:41:27,452] [10 ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-24 12:41:27,454] [14 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-24 12:41:27,454] [14 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-24 12:41:28,458] [19 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-24 12:41:32,426] [13 ] [INFO ] - Engine is still running...
+[2017-07-24 12:41:37,641] [13 ] [INFO ] - Engine is still running...
+[2017-07-24 12:41:45,830] [13 ] [INFO ] - Engine is still running...
+[2017-07-24 12:42:16,141] [12 ] [INFO ] - Engine is still running...
+[2017-07-24 12:42:16,142] [9  ] [INFO ] - Started [1] thread for monitoring
+[2017-07-24 12:42:16,172] [9  ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-24 12:42:16,191] [13 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-24 12:42:16,192] [13 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-24 12:42:16,193] [13 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-24 12:42:16,194] [9  ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-24 12:42:17,201] [19 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-24 12:42:21,174] [12 ] [INFO ] - Engine is still running...
+[2017-07-24 12:42:26,175] [12 ] [INFO ] - Engine is still running...
+[2017-07-24 12:42:26,475] [14 ] [INFO ] - Crawl for domain [http://mercadoganado.talavera.es/content/mesa-de-precios-de-ganado] completed successfully in [10.1112513] seconds, crawled [25] pages
+[2017-07-24 12:42:26,483] [18 ] [INFO ] - All ISiteToCrawlConsumer threads have completed
+[2017-07-24 12:42:26,490] [18 ] [INFO ] - All crawls have completed
+[2017-07-24 13:06:25,601] [12 ] [INFO ] - Engine is still running...
+[2017-07-24 13:06:25,601] [10 ] [INFO ] - Started [1] thread for monitoring
+[2017-07-24 13:06:25,621] [10 ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-24 13:06:25,653] [10 ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-24 13:06:25,653] [13 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-24 13:06:25,653] [13 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-24 13:06:25,668] [13 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-24 13:06:26,670] [20 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-24 13:06:30,656] [12 ] [INFO ] - Engine is still running...
+[2017-07-24 13:06:35,455] [14 ] [INFO ] - Crawl for domain [http://mercadoganado.talavera.es/content/mesa-de-precios-de-ganado] completed successfully in [9.6402786] seconds, crawled [25] pages
+[2017-07-24 13:06:35,493] [18 ] [INFO ] - All ISiteToCrawlConsumer threads have completed
+[2017-07-24 13:06:35,493] [18 ] [INFO ] - All crawls have completed
+[2017-07-24 13:07:41,065] [9  ] [INFO ] - Started [1] thread for monitoring
+[2017-07-24 13:07:41,065] [12 ] [INFO ] - Engine is still running...
+[2017-07-24 13:07:41,085] [9  ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-24 13:07:41,101] [13 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-24 13:07:41,101] [13 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-24 13:07:41,101] [13 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-24 13:07:41,117] [9  ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-24 13:07:42,121] [18 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-24 13:07:46,094] [12 ] [INFO ] - Engine is still running...
+[2017-07-24 13:07:51,111] [12 ] [INFO ] - Engine is still running...
+[2017-07-24 13:07:52,926] [14 ] [INFO ] - Crawl for domain [http://mercadoganado.talavera.es/content/mesa-de-precios-de-ganado] completed successfully in [11.6503535] seconds, crawled [25] pages
+[2017-07-24 13:07:52,942] [19 ] [INFO ] - All ISiteToCrawlConsumer threads have completed
+[2017-07-24 13:07:52,959] [19 ] [INFO ] - All crawls have completed
+[2017-07-24 13:12:31,847] [9  ] [INFO ] - Started [1] thread for monitoring
+[2017-07-24 13:12:31,847] [12 ] [INFO ] - Engine is still running...
+[2017-07-24 13:12:31,879] [9  ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-24 13:12:31,894] [9  ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-24 13:12:31,910] [13 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-24 13:12:31,910] [13 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-24 13:12:31,910] [13 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-24 13:12:32,927] [20 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-24 13:12:36,892] [12 ] [INFO ] - Engine is still running...
+[2017-07-24 13:12:41,914] [12 ] [INFO ] - Engine is still running...
+[2017-07-24 13:12:41,999] [14 ] [INFO ] - Crawl for domain [http://mercadoganado.talavera.es/content/mesa-de-precios-de-ganado] completed successfully in [9.9385991] seconds, crawled [25] pages
+[2017-07-24 13:12:41,999] [18 ] [INFO ] - All ISiteToCrawlConsumer threads have completed
+[2017-07-24 13:12:41,999] [18 ] [INFO ] - All crawls have completed
+[2017-07-24 13:15:17,219] [9  ] [INFO ] - Started [1] thread for monitoring
+[2017-07-24 13:15:17,219] [12 ] [INFO ] - Engine is still running...
+[2017-07-24 13:15:17,279] [9  ] [INFO ] - Started [1] thread running ISiteToCrawlProducer of type [AbotX.Parallel.SiteToCrawlProducer]
+[2017-07-24 13:15:17,299] [9  ] [INFO ] - Started [3] threads running ISiteToCrawlConsumer of type [AbotX.Parallel.SiteToCrawlConsumer]
+[2017-07-24 13:15:17,301] [13 ] [INFO ] - Retrieving up to [25] sites to crawl
+[2017-07-24 13:15:17,301] [13 ] [INFO ] - Retrieved [1] sites to crawl
+[2017-07-24 13:15:17,301] [13 ] [INFO ] - ISiteToCrawlProvider [AbotX.Parallel.SiteToCrawlProvider] is reporting that it is complete. Will not make anymore requests for sites to crawl.
+[2017-07-24 13:15:18,319] [20 ] [INFO ] - All ISiteToCrawlProducer threads have completed
+[2017-07-24 13:15:22,288] [12 ] [INFO ] - Engine is still running...
+[2017-07-24 13:15:27,060] [15 ] [INFO ] - Crawl for domain [http://mercadoganado.talavera.es/content/mesa-de-precios-de-ganado] completed successfully in [9.6011683] seconds, crawled [25] pages
+[2017-07-24 13:15:27,060] [18 ] [INFO ] - All ISiteToCrawlConsumer threads have completed
+[2017-07-24 13:15:27,060] [18 ] [INFO ] - All crawls have completed

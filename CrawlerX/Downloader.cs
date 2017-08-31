@@ -46,7 +46,7 @@ namespace CrawlerX
             FileItem fi0 = new FileItem { Source = new Uri("http://www.efeagro.com/?cat=2&submit=Buscar&s=+"), Destination= @"C:\Users\Miguel Angel\Documents\Datos\RSS\Agricultura\" + "efeagro1" + ".html" };
             client.DownloadFile(fi0.Source,fi0.Destination);
             List<FileItem> files = new List<FileItem>();
-            for (int i = 2; i <= 162; i++)
+            for (int i = 2; i <8; i++)
             {
                 FileItem fi = new FileItem { Source = new Uri("http://www.efeagro.com/page/"+i+"/"+"?cat=2&submit=Buscar&s=+"), Destination = @"C:\Users\Miguel Angel\Documents\Datos\RSS\Agricultura\" + "efeagro"+i+ ".html" };
                 files.Add(fi);
@@ -60,10 +60,10 @@ namespace CrawlerX
         }
         public void Agroinfo_Manual()
         {
-            //FileItem fi0 = new FileItem { Source = new Uri("http://www.agroinformacion.com/category/agricultura/"), Destination = @"C:\Users\Miguel Angel\Documents\Datos\RSS\Agricultura\" + "agroinfo1" + ".html" };
-            //client.DownloadFile(fi0.Source, fi0.Destination);
+            FileItem fi0 = new FileItem { Source = new Uri("http://www.agroinformacion.com/category/agricultura/"), Destination = @"C:\Users\Miguel Angel\Documents\Datos\RSS\Agricultura\" + "agroinfo1" + ".html" };
+            client.DownloadFile(fi0.Source, fi0.Destination);
             List<FileItem> files = new List<FileItem>();
-            for (int i = 200; i <= 523; i++)
+            for (int i = 2; i <= 10; i++)
             {
                 FileItem fi = new FileItem { Source = new Uri("http://www.agroinformacion.com/category/agricultura/"+"page/" + i + "/"), Destination = @"C:\Users\Miguel Angel\Documents\Datos\RSS\Agricultura\" + "agroinfo" + i + ".html" };
                 files.Add(fi);

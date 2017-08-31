@@ -196,7 +196,7 @@ namespace CrawlerX
         public void read_arroz()
         {
 
-            foreach (string file in Directory.EnumerateFiles("C:/Users/Miguel Angel/Documents/Datos/Mapama/Arroz/", "*.xlsx"))
+            foreach (string file in Directory.EnumerateFiles("C:/Users/Miguel Angel/Documents/Datos/Mapama/Arroz/Excel", "*.xlsx"))
             {
                 FileStream stream = File.Open(file, FileMode.Open, FileAccess.Read);
                 IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);

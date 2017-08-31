@@ -231,13 +231,14 @@ namespace CrawlerX
             p2.fuente = "Talavera";            
             p2.medida = medida;
             partes = null;
-            GuardaPrecio(p1);
-            GuardaPrecio(p2);
+            //GuardaPrecio(p1);
+            //GuardaPrecio(p2);
 
 
         }
         public void DatosVacuno()
         {
+            DateTime date = ultimoTal();
             foreach (string file in Directory.EnumerateFiles("C:/Users/Miguel Angel/Documents/Datos/Lonjas/LonjaTalavera/Vacuno", "*.pdf"))
             {
                 text = new StringBuilder();
@@ -255,65 +256,130 @@ namespace CrawlerX
                     contador++;
 
                 }
+
                 pdfReader.Close();
                 string tabla = text.ToString();
                 string[] filas = tabla.Split('\n');
-                for (int i = 0; i < filas.Length; i++)
+
+                if ((file.Contains("julio") & file.Contains("26")) || file.Contains("agosto"))
                 {
-                    if (filas[i].ToLower().Contains("ternero") && filas[i].ToLower().Contains("cruzado") && filas[i].ToLower().Contains("base"))
+                    for (int i = 0; i < filas.Length; i++)
                     {
-                        if (filas[i].ToLower().Contains("1ª"))
+                        if (filas[i].ToLower().Contains("ternero") && filas[i].ToLower().Contains("cruzado") && filas[i].ToLower().Contains("base"))
                         {
-                            string codigo1 = "TO200C1";
-                            string[] partes = filas[i].Split(' ');
-                            PreciosVacuno(partes, codigo1, file);
+                            if (filas[i].ToLower().Contains("1ª"))
+                            {
+                                string codigo1 = "TO200C1";
+                                string[] partes = filas[i].Split(' ');
+                                PreciosVacuno2017(partes, codigo1, file,date);
+
+                            }
+                            else
+                            {
+                                string codigo2 = "TO200C2";
+                                string[] partes = filas[i].Split(' ');
+                                PreciosVacuno2017(partes, codigo2, file,date);
+                            }
+
 
                         }
-                        else
+                        if (filas[i].ToLower().Contains("ternera") && filas[i].ToLower().Contains("cruzada") && filas[i].ToLower().Contains("base"))
                         {
-                            string codigo2 = "TO200C2";
+                            if (filas[i].ToLower().Contains("1ª"))
+                            {
+                                string codigo1 = "TA200C1";
+                                string[] partes = filas[i].Split(' ');
+                                PreciosVacuno2017(partes, codigo1, file,date);
+                            }
+                            else
+                            {
+                                string codigo2 = "TA200C2";
+                                string[] partes = filas[i].Split(' ');
+                                PreciosVacuno2017(partes, codigo2, file,date);
+                            }
+
+                        }
+                        if (filas[i].ToLower().Contains("ternero") && filas[i].ToLower().Contains("pais") && filas[i].ToLower().Contains("base"))
+                        {
+                            string codigo = "TO200PA";
                             string[] partes = filas[i].Split(' ');
-                            PreciosVacuno(partes, codigo2, file);
+                            PreciosVacuno2017(partes, codigo, file,date);
+
+                        }
+                        if (filas[i].ToLower().Contains("ternera") && filas[i].ToLower().Contains("pais") && filas[i].ToLower().Contains("base"))
+                        {
+                            string[] partes = filas[i].Split(' ');
+                            string codigo = "TA200PA";
+                            PreciosVacuno2017(partes, codigo, file,date);
                         }
 
-
                     }
-                    if (filas[i].ToLower().Contains("ternera") && filas[i].ToLower().Contains("cruzada") && filas[i].ToLower().Contains("base"))
-                    {
-                        if (filas[i].ToLower().Contains("1ª"))
-                        {
-                            string codigo1 = "TA200C1";
-                            string[] partes = filas[i].Split(' ');
-                            PreciosVacuno(partes, codigo1, file);
-                        }
-                        else
-                        {
-                            string codigo2 = "TA200C2";
-                            string[] partes = filas[i].Split(' ');
-                            PreciosVacuno(partes, codigo2, file);
-                        }
 
-
-
-                    }
-                    if (filas[i].ToLower().Contains("ternero") && filas[i].ToLower().Contains("pais") && filas[i].ToLower().Contains("base"))
-                    {
-                        string codigo = "TO200PA";
-                        string[] partes = filas[i].Split(' ');
-                        PreciosVacuno(partes, codigo, file);
-
-                    }
-                    if (filas[i].ToLower().Contains("ternera") && filas[i].ToLower().Contains("pais") && filas[i].ToLower().Contains("base"))
-                    {
-                        string[] partes = filas[i].Split(' ');
-                        string codigo = "TA200PA";
-                        PreciosVacuno(partes, codigo, file);
-                    }
                 }
+                /*
+                else
+                {                                      
+                    for (int i = 0; i < filas.Length; i++)
+                    {
+                        if (filas[i].ToLower().Contains("ternero") && filas[i].ToLower().Contains("cruzado") && filas[i].ToLower().Contains("base"))
+                        {
+                            if (filas[i].ToLower().Contains("1ª"))
+                            {
+                                string codigo1 = "TO200C1";
+                                string[] partes = filas[i].Split(' ');
+                                PreciosVacuno(partes, codigo1, file);
+
+                            }
+                            else
+                            {
+                                string codigo2 = "TO200C2";
+                                string[] partes = filas[i].Split(' ');
+                                PreciosVacuno(partes, codigo2, file);
+                            }
+
+
+                        }
+                        if (filas[i].ToLower().Contains("ternera") && filas[i].ToLower().Contains("cruzada") && filas[i].ToLower().Contains("base"))
+                        {
+                            if (filas[i].ToLower().Contains("1ª"))
+                            {
+                                string codigo1 = "TA200C1";
+                                string[] partes = filas[i].Split(' ');
+                                PreciosVacuno(partes, codigo1, file);
+                            }
+                            else
+                            {
+                                string codigo2 = "TA200C2";
+                                string[] partes = filas[i].Split(' ');
+                                PreciosVacuno(partes, codigo2, file);
+                            }
+
+
+
+                        }
+                        if (filas[i].ToLower().Contains("ternero") && filas[i].ToLower().Contains("pais") && filas[i].ToLower().Contains("base"))
+                        {
+                            string codigo = "TO200PA";
+                            string[] partes = filas[i].Split(' ');
+                            PreciosVacuno(partes, codigo, file);
+
+                        }
+                        if (filas[i].ToLower().Contains("ternera") && filas[i].ToLower().Contains("pais") && filas[i].ToLower().Contains("base"))
+                        {
+                            string[] partes = filas[i].Split(' ');
+                            string codigo = "TA200PA";
+                            PreciosVacuno(partes, codigo, file);
+                        }
+                    }
+
+                }
+                */
             }
         }
         public void PreciosVacuno(string[] partes, string code, string file)
         {
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            Calendar cal = dfi.Calendar;
             string[] partes_nombre = file.Split('_');
             string[] nombre = partes_nombre[1].Split('.');
             int año = System.Convert.ToInt16(nombre[0]);
@@ -328,7 +394,7 @@ namespace CrawlerX
 
 
             List<double> precios = new List<double>();
-            for (int j = 6; j < partes.Length; j++)
+            for (int j = 6; j < 19; j++)
             {
                 if (partes[j] != "" && partes[j].Contains("."))
                 {
@@ -348,11 +414,16 @@ namespace CrawlerX
             }
             int contador = 1;
             foreach (double dato in precios)
-            {
+            {                               
                 num_mes = contador;
                 nom_mes = mes(contador);
                 fecha = dia + "-" + CompruebaMes(num_mes) + "-" + año;
                 contador++;
+                if (num_mes < 13)
+                {
+                    DateTime date = new DateTime(año, num_mes, dia);
+                    semana = System.Convert.ToInt16(cal.GetWeekOfYear(date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek).ToString());
+                }                
                 Precio p = new Precio();
                 p.codigo = code;
                 p.precio = dato;
@@ -365,23 +436,47 @@ namespace CrawlerX
                 p.tipoPrecio = tipo_precio;
                 p.fuente = "Talavera";
                 p.medida = medida;
-                GuardaPrecio(p);
+                GuardaPrecioVac(p);
             }
 
 
         }
-        public string CompruebaMes(int mes)
+        public void PreciosVacuno2017(string[] partes, string code, string file, DateTime dateult)
         {
-            string month = null;
-            if (mes < 10)
-            {
-                month = "0" + mes;
-            }
-            else
-            {
-                month = string.Concat(mes);
-            }
-            return month;
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            Calendar cal = dfi.Calendar;
+
+            string[] partes_nombre = file.Split('\\');
+            string[] nombre = partes_nombre[1].Split('.')[0].Split('_');
+
+            int año = System.Convert.ToInt16(nombre[2]);
+            int num_mes = System.Convert.ToInt16(ConvierteMes(nombre[1]));
+            string nom_mes = nombre[1];
+            int dia = System.Convert.ToInt16(nombre[0]);
+            int semana = 0;
+            string fecha = dia + "-" + CompruebaMes(num_mes) + "-" + año;
+           
+            DateTime date = new DateTime(año, num_mes, dia);
+            semana = System.Convert.ToInt16(cal.GetWeekOfYear(date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek).ToString());
+
+            string medida = "Euros/kg";
+            string tipo_precio = "med";
+            Precio p = new Precio();
+            p.codigo = code;
+            p.precio  = double.Parse(partes[7]);
+            p.dia = dia;
+            p.semana = semana;
+            p.numMes = num_mes;
+            p.nomMes = nom_mes;
+            p.año = año;
+            p.fecha = fecha;
+            p.tipoPrecio = tipo_precio;
+            p.fuente = "Talavera";
+            p.medida = medida;
+            GuardaPrecio(p,dateult);
+            
+
+
         }
         public string mes(int posicion)
         {
@@ -434,12 +529,16 @@ namespace CrawlerX
 
             return mes;
         }
-        public void GuardaPrecio(Precio p)
+        public void GuardaPrecio(Precio p, DateTime date2)
         {
-            elasticClient.Index(p, es => es
-                                            .Index("agroesi")
-                                           .Type("precio")
-                              );
+            DateTime date1 = new DateTime(p.año, p.numMes, p.dia);
+            if (date1 > date2)
+            {
+                elasticClient.Index(p, es => es
+                                       .Index("agroesi")
+                                       .Type("precio")
+                          );
+            }
         }
         public void BalanceCereales()
         {
@@ -758,7 +857,7 @@ namespace CrawlerX
             p.tipoPrecio = "max";
             p.fuente = "Gobierno";
             p.medida = "Euros/t";
-            GuardaPrecio(p);
+            GuardaPrecioVac(p);
         }
         public void BalanceSoja()
         {
@@ -835,6 +934,230 @@ namespace CrawlerX
             }
 
         }
+        public DateTime ultimoTal()
+        {
+            DateTime date = new DateTime(2000, 1, 1);
+            var ultimoP = elasticClient.Search<Precio>(s => s
+                                                        .Index("agroesi")
+                                                        .Type("precio")
+                                                        .Size(1)
+                                                        .Sort(ss => ss.Descending(pre => pre.fecha))
+                                                        .Query(q => q.Term(pre => pre.fuente, "Talavera".ToLower())));
 
+            foreach (var hit in ultimoP.Hits)
+            {
+                date = new DateTime(hit.Source.año, hit.Source.numMes, hit.Source.dia);
+            }
+
+            return date;
+
+        }
+        public void GuardaPrecioVac(Precio p)
+        {
+
+                elasticClient.Index(p, es => es
+                                       .Index("agroesi")
+                                       .Type("precio")
+                          );
+
+        }
+        public void DatosVac()
+        {
+            if (Directory.GetFiles("C:/Users/Miguel Angel/Documents/Datos/Lonjas/LonjaTalavera/Servicio", "*.pdf").Length > 0)
+            {
+                foreach (string file in Directory.EnumerateFiles("C:/Users/Miguel Angel/Documents/Datos/Lonjas/LonjaTalavera/Servicio", "*.pdf"))
+                {
+                    StringBuilder text = null;
+                    PdfReader pdfReader = null;
+
+                    text = new StringBuilder();
+                    pdfReader = new PdfReader(file);
+                    int contador = 0;
+                    for (int page = 1; page <= pdfReader.NumberOfPages; page++)
+                    {
+                        if (contador == 0)
+                        {
+                            ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
+                            string currentText = PdfTextExtractor.GetTextFromPage(pdfReader, page, strategy);
+                            currentText = Encoding.UTF8.GetString(ASCIIEncoding.Convert(Encoding.Default, Encoding.UTF8, Encoding.Default.GetBytes(currentText)));
+                            text.Append(currentText);
+                        }
+                        contador++;
+
+                    }
+                    pdfReader.Close();
+                    string tabla = text.ToString();
+                    string[] filas = tabla.Split('\n');
+
+                    for (int i = 0; i < filas.Length; i++)
+                    {
+                        if (filas[i].ToLower().Contains("ternero") && filas[i].ToLower().Contains("cruzado") && filas[i].ToLower().Contains("base"))
+                        {
+                            if (filas[i].ToLower().Contains("1ª"))
+                            {
+                                string codigo1 = "TO200C1";
+                                string[] partes = filas[i].Split(' ');
+                                PreciosVac(partes, codigo1, file);
+
+                            }
+                            else
+                            {
+                                string codigo2 = "TO200C2";
+                                string[] partes = filas[i].Split(' ');
+                                PreciosVac(partes, codigo2, file);
+                            }
+
+
+                        }
+                        if (filas[i].ToLower().Contains("ternera") && filas[i].ToLower().Contains("cruzada") && filas[i].ToLower().Contains("base"))
+                        {
+                            if (filas[i].ToLower().Contains("1ª"))
+                            {
+                                string codigo1 = "TA200C1";
+                                string[] partes = filas[i].Split(' ');
+                                PreciosVac(partes, codigo1, file);
+                            }
+                            else
+                            {
+                                string codigo2 = "TA200C2";
+                                string[] partes = filas[i].Split(' ');
+                                PreciosVac(partes, codigo2, file);
+                            }
+
+                        }
+                        if (filas[i].ToLower().Contains("ternero") && filas[i].ToLower().Contains("pais") && filas[i].ToLower().Contains("base"))
+                        {
+                            string codigo = "TO200PA";
+                            string[] partes = filas[i].Split(' ');
+                            PreciosVac(partes, codigo, file);
+
+                        }
+                        if (filas[i].ToLower().Contains("ternera") && filas[i].ToLower().Contains("pais") && filas[i].ToLower().Contains("base"))
+                        {
+                            string[] partes = filas[i].Split(' ');
+                            string codigo = "TA200PA";
+                            PreciosVac(partes, codigo, file);
+                        }
+                    }
+                }
+
+            }
+
+        }
+        public void PreciosVac(string[] partes, string code, string file)
+        {
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            Calendar cal = dfi.Calendar;
+
+            string[] partes_nombre = file.Split('\\');
+            string[] nombre = partes_nombre[1].Split('.')[0].Split('_');
+
+            int año = System.Convert.ToInt16(nombre[2]);
+            int num_mes = System.Convert.ToInt16(ConvierteMes(nombre[1]));
+            string nom_mes = nombre[1];
+            int dia = System.Convert.ToInt16(nombre[0]);
+            int semana = 0;
+            string fecha = null; 
+            if (dia < 10)
+            {
+                fecha="0"+dia + "-" + CompruebaMes(num_mes) + "-" + año;
+            }else
+            {
+                fecha = dia + "-" + CompruebaMes(num_mes) + "-" + año;
+            }
+
+            DateTime date = new DateTime(año, num_mes, dia);
+            semana = System.Convert.ToInt16(cal.GetWeekOfYear(date, dfi.CalendarWeekRule, dfi.FirstDayOfWeek).ToString());
+
+            string medida = "Euros/kg";
+            string tipo_precio = "med";
+            Precio p = new Precio();
+            p.codigo = code;
+            p.precio = double.Parse(partes[7]);
+            p.dia = dia;
+            p.semana = semana;
+            p.numMes = num_mes;
+            p.nomMes = nom_mes;
+            p.año = año;
+            p.fecha = fecha;
+            p.tipoPrecio = tipo_precio;
+            p.fuente = "Talavera";
+            p.medida = medida;
+            GuardaPrecioVac(p, ultimoTal());
+
+        }
+        public void GuardaPrecioVac(Precio p, DateTime date)
+        {
+            DateTime dateP = new DateTime(p.año, p.numMes, p.dia);
+            if (dateP > date)
+            {
+                elasticClient.Index(p, es => es
+                                   .Index("agroesi")
+                                   .Type("precio")
+                      );
+            }
+
+
+        }
+        public string ConvierteMes(string dato)
+        {
+            string mes = null;
+            switch (dato)
+            {
+                case "enero":
+                    mes = "01";
+                    break;
+                case "febrero":
+                    mes = "02";
+                    break;
+                case "marzo":
+                    mes = "03";
+                    break;
+                case "abril":
+                    mes = "04";
+                    break;
+                case "mayo":
+                    mes = "05";
+                    break;
+                case "junio":
+                    mes = "06";
+                    break;
+                case "julio":
+                    mes = "07";
+                    break;
+                case "agosto":
+                    mes = "08";
+                    break;
+                case "septiembre":
+                    mes = "09";
+                    break;
+                case "octubre":
+                    mes = "10";
+                    break;
+                case "noviembre":
+                    mes = "11";
+                    break;
+                case "diciembre":
+                    mes = "12";
+                    break;
+            }
+
+
+            return mes;
+
+        }
+        public string CompruebaMes(int mes)
+        {
+            string month = null;
+            if (mes < 10)
+            {
+                month = "0" + mes;
+            }
+            else
+            {
+                month = string.Concat(mes);
+            }
+            return month;
+        }
     }
 }

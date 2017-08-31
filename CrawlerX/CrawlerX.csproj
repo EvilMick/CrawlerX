@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Broker.cs" />
+    <Compile Include="Clima.cs" />
     <Compile Include="Crawler.cs" />
     <Compile Include="DataExcell.cs" />
     <Compile Include="Downloader.cs" />

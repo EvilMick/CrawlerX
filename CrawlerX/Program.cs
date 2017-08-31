@@ -22,34 +22,21 @@ namespace CrawlerX
                 switch (userInput)
                 {
                     case 1:
-                        downloader.Download(crawler.getfiles());
-                        Console.WriteLine("Operacion terminada");
+                        //downloader.Download(crawler.getfiles());
                         break;
                     case 2:
-                        //extractor.extraer_datos();
-                        //extractor.LonjaAlbacete();
-                        extractor.NoticiasGanaderia();
-                        //extractor.BalanceArroz();
-                        //extractor.Soja();
-                        //extractor.NoticiasAgricultura();
+                        //extractor.Albacete();
                         break;
                     case 3:
-                        //reader.RSS_XML();
-                        //downloader.Manual_Download();
-                        //downloader.EfeAgro_Manual();
-                        downloader.Agroinfo_Manual();
+                        reader.RSS_XML();
                         break;
                     case 4:
                         //excell.read_data();
-                        excell.read_arroz();
+                        //excell.read_arroz();
                         break;
 
                     case 6:
                         //pdfextractor.DatosOvino();
-                        //pdfextractor.DatosVacuno();
-                        //pdfextractor.BalanceCereales();
-                        //pdfextractor.ArrozPDF();
-                        pdfextractor.BalanceSoja();
                         break;
                 }
 

@@ -1,4 +1,6 @@
 ﻿using AngleSharp.Parser.Html;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
 using Nest;
 using System;
 using System.Collections;
@@ -6,6 +8,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Text;
 
 namespace CrawlerX
 {
@@ -563,10 +566,12 @@ namespace CrawlerX
         }
         public void GuardaPrecio(Precio p)
         {
+   
             elasticClient.Index(p, es => es
                                  .Index("agroesi")
                                  .Type("precio")
                               );
+        
         }
         public void GuardaNoticia(Noticia n)
         {
@@ -619,7 +624,7 @@ namespace CrawlerX
             DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
             Calendar cal = dfi.Calendar;
 
-            for (int i = 1; i < 122; i++)
+            for (int i = 122; i < 181; i++)
             {
                 var celdas = filas[i].Children;
                 string mes = celdas[0].TextContent;
@@ -917,8 +922,403 @@ namespace CrawlerX
                
             return contenido;
         }
+        public void Clima()
+        {
+            foreach (string file in Directory.EnumerateFiles("C:/Users/Miguel Angel/Documents/Datos/Clima/", "*.html"))
+            {
+                string contents = File.ReadAllText(file, System.Text.Encoding.UTF8);
+                var parser = new HtmlParser();
+                var document = parser.Parse(contents);
+
+                //var tabla = document.GetElementsByClassName("medias mensuales");
+                //var filas = tabla[0].GetElementsByTagName("tr");
+
+                //var celdas = filas[filas.Length - 1].Children;
+                //int contador = 0;
+                //foreach (var celda in celdas)
+                //{
+                 //   contador++;
+                //    if(contador>1 & contador < 11)
+                 //   {
+                  //      string dato = celda.TextContent;
+                 //   }
+                    
+                //}
+
+                var meses = document.GetElementsByClassName("mlistados mt10")[0].Children[1].Children;
+                List<FileItem> files = new List<FileItem>();
+                foreach (var mes in meses)
+                {
+                                     
+                    string enlace = "https://www.tutiempo.net"+mes.FirstElementChild.GetAttribute("href");
+                    System.Uri uri = new System.Uri(enlace);
+                    FileItem fi = new FileItem { Source=uri, Destination=@"C:\Users\Miguel Angel\Documents\Datos\Clima\Meses\" + mes.FirstElementChild.GetAttribute("href").Substring(7,7)+".html"};
+                    files.Add(fi);
+                }
+                WebClient client = new WebClient();
+                foreach (FileItem fi in files)
+                {
+                    client.DownloadFile(fi.Source, fi.Destination);
+                }
+            }
+           
+        }
+        public void ExtraeClima()
+        {
+            foreach (string file in Directory.EnumerateFiles("C:/Users/Miguel Angel/Documents/Datos/Clima/Meses/", "*.html"))
+            {
+                string contents = File.ReadAllText(file, System.Text.Encoding.UTF8);
+                var parser = new HtmlParser();
+                var document = parser.Parse(contents);
+
+                string mesyañoaux = null;
+                int año = 0;
+                string[] partes = file.Split('.');
+                mesyañoaux = partes[0].Substring(50);
+                string[] partesmesyaño = mesyañoaux.Split('-');
+                int numMes = Convert.ToInt16(partesmesyaño[0]);
+                año = Convert.ToInt16(partesmesyaño[1]);
+                string mes = ConvierteMesInv(partesmesyaño[0]);
+
+                var tabla = document.GetElementsByClassName("medias mensuales");
+                var filas = tabla[0].GetElementsByTagName("tr");
+
+                var celdas = filas[filas.Length - 1].Children;
+                int contador = 0;
+                List<double> valores = new List<double>();
+                double dato = 0;
+                foreach (var celda in celdas)
+                {
+                   contador++;
+                    if(contador>1 & contador < 11)
+                   {
+                        if (celda.TextContent=="-")
+                        {
+                            dato = 0;
+                        }else
+                        {
+                            dato = double.Parse(celda.TextContent,CultureInfo.InvariantCulture);
+                        }
+                        
+                        valores.Add(dato);
+                   }
+
+                }
+                Clima c = new Clima();
+                c.año = año;
+                c.numMes = numMes;
+                c.nomMes = mes;
+                c.Tmedia = valores[0];
+                c.Tmax = valores[1];
+                c.Tmin = valores[2];
+                c.PresionATM = valores[3];
+                c.Humedad = valores[4];
+                c.Lluvia = valores[5];
+                c.Visibilidad = valores[6];
+                c.VelocidadMed = valores[7];
+                c.VelocidadMax = valores[8];
+                GuardaClima(c);
+
+
+            }
+
+        }
+        public void GuardaClima(Clima c)
+        {
+            elasticClient.Index(c, es => es
+                                            .Index("meteo")
+                                           .Type("clima")
+                                           
+                              );
+        }
+        public void Albacete()
+        {
+            string contenido = null; ;
+            try
+            {
+                WebRequest req = HttpWebRequest.Create("http://www.itap.es/inicio/lonja/hist%C3%B3rico-de-precios/");
+                req.Method = "GET";
+                using (StreamReader reader = new StreamReader(req.GetResponse().GetResponseStream()))
+                {
+                    contenido = reader.ReadToEnd();
+                }
+
+            }
+            catch (Exception ex)
+            {
+            }
+
+            var parser = new HtmlParser();
+            var document = parser.Parse(contenido);
+
+            var semanas = document.GetElementsByTagName("h3");
+            var tablas = document.GetElementsByClassName("datos");
+
+            List<string> fechas = new List<string>();
+            List<int> num_semana = new List<int>();
+            string fecha = null;
+            int contador = 0;
+            DateTime ultAlb = ultimoAlb();
+            foreach (var semana in semanas)
+            {
+                fecha = semana.TextContent;
+                string[] partes = fecha.Split('.');
+                string[] partes_fecha = partes[0].Split(' ');
+                string[] partes_semana = partes[1].Trim(' ').Split(' ');
+                int n_semana = System.Convert.ToInt16(partes_semana[1]);
+                string[] comp_fecha = partes_fecha[3].Split('/');
+                fecha = comp_fecha[0] + "-" + comp_fecha[1] + "-" + comp_fecha[2];
+                fechas.Add(fecha);
+                num_semana.Add(n_semana);
+
+            }
+            foreach (var tabla in tablas)
+            {
+                var filas = tabla.GetElementsByTagName("tr");
+                foreach (var fila in filas)
+                {
+                    var celdas = fila.GetElementsByTagName("td");
+                    if (celdas[1].TextContent.ToLower().Contains("trigo") && celdas[2].TextContent.ToLower().Contains("panificables"))
+                    {
+
+                        string codigo = "TB";
+                        CreaPrecioAlbaceteCereal(codigo, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("trigo") && celdas[2].TextContent.ToLower().Contains("grupo 1"))
+                    {
+
+                        string codigo = "TD";
+                        CreaPrecioAlbaceteCereal(codigo, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[2].TextContent.ToLower().Contains("secadero"))
+                    {
+
+                        string codigo = "MZ";
+                        CreaPrecioAlbaceteCereal(codigo, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("leche") && celdas[1].TextContent.ToLower().Contains("cabra"))
+                    {
+
+                        string codigo = "LC";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("leche") && celdas[1].TextContent.ToLower().Contains("oveja") && celdas[1].TextContent.ToLower().Contains("con"))
+                    {
+
+                        string codigo = "LOCDO";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("leche") && celdas[1].TextContent.ToLower().Contains("oveja") && celdas[1].TextContent.ToLower().Contains("sin"))
+                    {
+
+                        string codigo = "LOSDO";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("cabrito") && celdas[2].TextContent.ToLower().Contains("basto"))
+                    {
+
+                        string codigo = "C7B10";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("cabrito") && celdas[2].TextContent.ToLower().Contains("fino"))
+                    {
+
+                        string codigo = "C7F9";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("cordero") && celdas[1].TextContent.ToLower().Contains("con") && celdas[2].TextContent.ToLower().Contains("10.5"))
+                    {
+
+                        string codigo = "CM10CI15";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("cordero") && celdas[1].TextContent.ToLower().Contains("con") && celdas[2].TextContent.ToLower().Contains("15.1"))
+                    {
+
+                        string codigo = "CM15CI19";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("cordero") && celdas[1].TextContent.ToLower().Contains("con") && celdas[2].TextContent.ToLower().Contains("19.1"))
+                    {
+
+                        string codigo = "CM19CI23";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("cordero") && celdas[1].TextContent.ToLower().Contains("con") && celdas[2].TextContent.ToLower().Contains("23.1"))
+                    {
+
+                        string codigo = "CM23CI25";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("cordero") && celdas[1].TextContent.ToLower().Contains("con") && celdas[2].TextContent.ToLower().Contains("25.5"))
+                    {
+
+                        string codigo = "CM25CI28";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("cordero") && celdas[1].TextContent.ToLower().Contains("con") && celdas[2].TextContent.ToLower().Contains("28.1"))
+                    {
+                        string codigo = "CM28CI34";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("cordero") && celdas[1].TextContent.ToLower().Contains("con") && celdas[2].TextContent.ToLower().Contains("media"))
+                    {
+
+                        string codigo = "CMCIM10";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("cordero") && celdas[1].TextContent.ToLower().Contains("sin") && celdas[2].TextContent.ToLower().Contains("10.5"))
+                    {
+
+                        string codigo = "CSI10YO15";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("cordero") && celdas[1].TextContent.ToLower().Contains("sin") && celdas[2].TextContent.ToLower().Contains("15.1"))
+                    {
+
+                        string codigo = "CSI15YO19";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("cordero") && celdas[1].TextContent.ToLower().Contains("sin") && celdas[2].TextContent.ToLower().Contains("19.1"))
+                    {
+
+                        string codigo = "CSI19YO23";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("cordero") && celdas[1].TextContent.ToLower().Contains("sin") && celdas[2].TextContent.ToLower().Contains("23.1"))
+                    {
+
+                        string codigo = "CSI23YO25";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("cordero") && celdas[1].TextContent.ToLower().Contains("sin") && celdas[2].TextContent.ToLower().Contains("25.5"))
+                    {
+
+                        string codigo = "CSI25YO28";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("cordero") && celdas[1].TextContent.ToLower().Contains("sin") && celdas[2].TextContent.ToLower().Contains("28.1"))
+                    {
+
+                        string codigo = "CSI28YO34";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+                    if (celdas[1].TextContent.ToLower().Contains("cordero") && celdas[1].TextContent.ToLower().Contains("sin") && celdas[2].TextContent.ToLower().Contains("media"))
+                    {
+
+                        string codigo = "CSIYOM10";
+                        CreaPrecioAlbacete(codigo, celdas[3].TextContent, celdas[4].TextContent, celdas[5].TextContent.Trim(' '), fechas[contador], num_semana[contador], ultAlb);
+
+                    }
+
+                }
+                contador++;
+            }
+            }
+        public void CreaPrecioAlbacete(string code, string min, string max, string medida, string fecha, int semana, DateTime date)
+        {
+            string[] datos = fecha.Split('-');
+            Precio Pmin = new Precio();
+            Pmin.codigo = code;
+            Pmin.precio = double.Parse(min);
+            Pmin.dia = System.Convert.ToInt16(datos[0]);
+            Pmin.semana = semana;
+            Pmin.numMes = System.Convert.ToInt16(datos[1]);
+            Pmin.nomMes = ConvierteMesInv(datos[1]);
+            Pmin.año = System.Convert.ToInt16(datos[2]);
+            Pmin.fecha = fecha;
+            Pmin.tipoPrecio = "min";
+            Pmin.fuente = "Albacete";
+            Pmin.medida = medida;
+            Precio Pmax = new Precio();
+            Pmax.codigo = code;
+            Pmax.precio = double.Parse(max);
+            Pmax.dia = System.Convert.ToInt16(datos[0]);
+            Pmax.semana = semana;
+            Pmax.numMes = System.Convert.ToInt16(datos[1]);
+            Pmax.nomMes = ConvierteMesInv(datos[1]);
+            Pmax.año = System.Convert.ToInt16(datos[2]);
+            Pmax.fecha = fecha;
+            Pmax.tipoPrecio = "max";
+            Pmax.fuente = "Albacete";
+            Pmax.medida = medida;
+            GuardaPrecioAlbacete(Pmin,date);
+            GuardaPrecioAlbacete(Pmax,date);
+
+        }
+        public void CreaPrecioAlbaceteCereal(string code, string max, string medida, string fecha, int semana, DateTime date)
+        {
+            string[] datos = fecha.Split('-');           
+            Precio Pmax = new Precio();
+            Pmax.codigo = code;
+            Pmax.precio = double.Parse(max);
+            Pmax.dia = System.Convert.ToInt16(datos[0]);
+            Pmax.semana = semana;
+            Pmax.numMes = System.Convert.ToInt16(datos[1]);
+            Pmax.nomMes = ConvierteMesInv(datos[1]);
+            Pmax.año = System.Convert.ToInt16(datos[2]);
+            Pmax.fecha = fecha;
+            Pmax.tipoPrecio = "max";
+            Pmax.fuente = "Albacete";
+            Pmax.medida = medida;
+            GuardaPrecioAlbacete(Pmax, date);
+
+        }
+        public void GuardaPrecioAlbacete(Precio p, DateTime date2)
+        {
+   
+            DateTime date1 = new DateTime(p.año, p.numMes, p.dia);
+            if (date1 > date2)
+            {
+                elasticClient.Index(p, es => es
+                                       .Index("agroesi")
+                                       .Type("precio")
+                          );
+            }
+
+        }
+        public DateTime ultimoAlb()
+        {
+            DateTime date = new DateTime(2000, 1, 1);
+            var ultimoP = elasticClient.Search<Precio>(s => s
+                                                        .Index("agroesi")
+                                                        .Type("precio")
+                                                        .Size(1)
+                                                        .Sort(ss => ss.Descending(pre => pre.fecha))
+                                                        .Query(q => q.Term(pre => pre.fuente, "Albacete".ToLower())));
+
+            foreach (var hit in ultimoP.Hits)
+            {
+                date = new DateTime(hit.Source.año, hit.Source.numMes, hit.Source.dia);
+            }
+
+            return date;
+
+        }
+        
     }
 }
         
-        
+       
 
