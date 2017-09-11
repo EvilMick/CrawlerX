@@ -27,16 +27,6 @@ namespace CrawlerX
                 new SiteToCrawl { Uri = new Uri("http://mercadoganado.talavera.es/content/mesa-de-precios-de-ganado")}
         });
 
-            /*
-             siteToCrawlProvider.AddSitesToCrawl(new List<SiteToCrawl>
-            {
-                new SiteToCrawl{ Uri = new Uri("http://www.tutiempo.net/clima/") },
-                new SiteToCrawl{ Uri = new Uri("http://www.preciopetroleo.net/") },
-                new SiteToCrawl{ Uri = new Uri("http://www.lonja.com/pub/0438lonjaciudadreal.html") },
-            });
-
-
-             */
             //Create the crawl engine instance
             var crawlEngine = new ParallelCrawlerEngine(new ParallelImplementationContainer
             {
